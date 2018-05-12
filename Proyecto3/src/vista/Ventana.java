@@ -5,6 +5,8 @@
  */
 package vista;
 
+
+
 import controlador.Controlador;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -222,17 +224,19 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(76, 76, 76)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton24))
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(393, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(76, 76, 76)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(299, 299, 299)
+                        .addComponent(jButton24)))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,10 +248,10 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton24))
-                .addContainerGap(575, Short.MAX_VALUE))
+                .addComponent(jButton1)
+                .addGap(97, 97, 97)
+                .addComponent(jButton24)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar Encuentro", jPanel1);
@@ -308,7 +312,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
                     .addComponent(jButton25))
-                .addContainerGap(539, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Generar Partidos de II Fase", jPanel2);
@@ -388,7 +392,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton13)
                     .addComponent(jButton26))
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Venta de Boletería ", jPanel3);
@@ -533,7 +537,7 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(129, 129, 129)
                 .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton7)
                 .addGap(165, 165, 165)
                 .addComponent(jButton8)
@@ -630,7 +634,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar Anotacion", jPanel6);
@@ -687,7 +691,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jButton23)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Programación", jPanel8);
@@ -784,7 +788,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel27))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton14)
                     .addComponent(jButton15))
@@ -896,7 +900,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton16)
                     .addComponent(jButton17))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Seleccion de Sillas", jPanel10);
@@ -1068,7 +1072,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton18)
                     .addComponent(jButton19))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Información de pago", jPanel11);
@@ -1149,7 +1153,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
                     .addComponent(jButton21))
-                .addContainerGap(327, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informacion del Cliente", jPanel12);
@@ -1356,7 +1360,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel86))
                 .addGap(83, 83, 83)
                 .addComponent(jButton22)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Confirmación de Compra", jPanel13);
@@ -1436,7 +1440,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jButton10)
                     .addComponent(jButton11)
                     .addComponent(jButton12))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Posiciones", jPanel7);
@@ -1451,7 +1455,9 @@ public class Ventana extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 260, Short.MAX_VALUE))
         );
 
         pack();
