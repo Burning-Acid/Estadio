@@ -24,9 +24,10 @@ public class Ventana extends javax.swing.JFrame {
     private Controlador controlador;
     public Ventana(Controlador _controlador) {
   
-        initComponents();
+        initComponents(); //Prueba prro
         controlador = _controlador;
         jTabbedPane1.setSelectedIndex(4);
+        setResizable(false);
         
     }
 
