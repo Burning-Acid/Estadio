@@ -11,6 +11,7 @@ import vista.*;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,8 @@ public class Controlador {
             controSilla = new SillaJpaController(emf);
             controTarjeta = new TarjetaJpaController(emf);
             controUsuario = new UsuarioJpaController(emf);
+            
+            
             
             vista = new Ventana(this);
             vista.setVisible(true);

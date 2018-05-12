@@ -1,12 +1,11 @@
-package vista;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import controlador.Controlador;
+package vista;
 
+import controlador.Controlador;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,13 +18,11 @@ public class Ventana extends javax.swing.JFrame {
     /**
      * Creates new form Ventana
      */
-    private static String fecha;
-    
+    public static String fecha;
     private Controlador controlador;
     public Ventana(Controlador _controlador) {
-  
-        initComponents(); //Prueba prro
         controlador = _controlador;
+        initComponents();
         jTabbedPane1.setSelectedIndex(4);
         setResizable(false);
         
@@ -1636,6 +1633,7 @@ public class Ventana extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         jTabbedPane1.setSelectedIndex(12);
     }//GEN-LAST:event_jButton11ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
