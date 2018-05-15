@@ -73,17 +73,11 @@ public class Controlador {
             vista = new Ventana(this);
             vista.setVisible(true);
         }
-    public void mostrarPartidoRE (List<Partido> partidos){
-        
-        partidos.forEach(par -> System.out.println(par.getCodEquipoLocal() +" - "+par.getCodEquipoVisitante()));
-    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Controlador controlador = new Controlador();
-        List<Partido> partidos = controlador.controPartido.findPartidoEntities(emf);
-        controlador.mostrarPartidoRE(partidos);
     }
     
 }

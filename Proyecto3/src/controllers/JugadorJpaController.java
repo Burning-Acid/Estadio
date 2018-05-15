@@ -24,6 +24,7 @@ import entities.Posicion;
 import entities.Tarjeta;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -31,10 +32,14 @@ import javax.persistence.EntityManagerFactory;
  */
 public class JugadorJpaController implements Serializable {
 
+    public JugadorJpaController()
+    {
+        
+    }
     public JugadorJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ControladorPU");
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

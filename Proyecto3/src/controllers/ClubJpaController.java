@@ -18,17 +18,21 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author linam
  */
 public class ClubJpaController implements Serializable {
+    
+    public ClubJpaController(){
+    }
 
     public ClubJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ControladorPU");
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
