@@ -1,7 +1,8 @@
-/Proyecto3/nbproject/private/
-/Proyecto3/src/META-INF/
-/Proyecto3/src/entities/
-/Proyecto3/build/classes/
-/Proyecto3/build/
+/Proyecto3/nbproject/private
+/Proyecto3/src/META-INF/persistence.xml
+/Proyecto3/build/classes/META-INF/persistence.xml
+/Proyecto3/src/entities
+/Proyecto3/build/classes
+/Proyecto3/build
 
 *.class
