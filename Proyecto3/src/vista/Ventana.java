@@ -1648,7 +1648,6 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        mostrarPartidos();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
@@ -1833,19 +1832,6 @@ public class Ventana extends javax.swing.JFrame {
         
     }
     
-    private void mostrarPartidos() {
-        
-        PartidoJpaController controPartido = new PartidoJpaController();
-        EquipoPaisJpaController controEquipo = new EquipoPaisJpaController();
-        List<Partido> partidos = controPartido.findPartidoEntities();
-        for(int i=1 ; i<partidos.size() ; ++i)
-        {
-            Partido par = partidos.get(i-1);
-            EquipoPais local = par.getCodEquipoLocal();
-            EquipoPais visitante = par.getCodEquipoVisitante();
-            jComboBox1.addItem(i + ". " + local.getNombre() + " - " + visitante.getNombre());
-        }
-    }
     /**
      * @param args the command line arguments
      */
