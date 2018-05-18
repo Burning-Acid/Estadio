@@ -20,9 +20,9 @@
     <class>entities.Rol</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@orion.javeriana.edu.co:1521:PUJDB"/>
-      <property name="javax.persistence.jdbc.user" value="is175807"/>
+      <property name="javax.persistence.jdbc.user" value="is175814"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-      <property name="javax.persistence.jdbc.password" value="l_zCGr7Kwl"/>
+      <property name="javax.persistence.jdbc.password" value="Nbe1NLAdgW"/>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.logging.parameters" value="true"/>
       
