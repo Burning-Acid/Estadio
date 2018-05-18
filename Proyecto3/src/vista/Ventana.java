@@ -7,7 +7,6 @@ package vista;
 
 
 
-import controlador.Controlador;
 import entities.EquipoPais;
 import entities.Partido;
 import java.awt.Event;
@@ -25,13 +24,8 @@ public class Ventana extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     public static String fecha;
-    private Controlador controlador;
-    public Ventana(Controlador _controlador) {
-        controlador = _controlador;
-        initComponents();
-        jTabbedPane1.setSelectedIndex(4);
-        setResizable(false);
-        
+    public Ventana() {
+        jTabbedPane1.setSelectedIndex(4);        
     }
 
     /**
@@ -1815,6 +1809,6 @@ public class Ventana extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        Ventana vista = new Ventana();
     }
 }
