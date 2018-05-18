@@ -7,6 +7,7 @@ package vista;
 
 
 
+import controllers.EquipoPaisJpaController;
 import controllers.PartidoJpaController;
 import entities.EquipoPais;
 import entities.Partido;
@@ -29,8 +30,9 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         jTabbedPane1.setSelectedIndex(4);
-        setVisible(true);
+        inicializar();
         setResizable(false);
+        setVisible(true);
     }
 
     /**
@@ -1810,23 +1812,45 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
+    private void inicializar()
+    {
+        //jComboBox1.addItem("hola");
+        //Actualizar lista de partidos de jComboBox1 en 'Registrar Encuentro'
+        
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        System.out.println(controPartido.getPartidoCount());
+        
+        
+        for(int i=1 ; i<partidos.size() ; ++i)
+        {
+            Partido par = partidos.get(i-1);
+            EquipoPais local = par.getCodEquipoLocal();
+            EquipoPais visitante = par.getCodEquipoVisitante();
+            String auxiliar = i + ". " + local.getNombre() + " - " + visitante.getNombre();
+            jComboBox1.addItem(auxiliar);
+        }
+        
+    }
     
     private void mostrarPartidos() {
         
         PartidoJpaController controPartido = new PartidoJpaController();
+        EquipoPaisJpaController controEquipo = new EquipoPaisJpaController();
         List<Partido> partidos = controPartido.findPartidoEntities();
-        for(Partido par: partidos)
+        for(int i=1 ; i<partidos.size() ; ++i)
         {
-            System.out.println(par.getCodEquipoLocal() + " - " + par.getCodEquipoVisitante());
+            Partido par = partidos.get(i-1);
+            EquipoPais local = par.getCodEquipoLocal();
+            EquipoPais visitante = par.getCodEquipoVisitante();
+            jComboBox1.addItem(i + ". " + local.getNombre() + " - " + visitante.getNombre());
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Ventana view = new Ventana();
-        view.mostrarPartidos();
     }
 
 }
