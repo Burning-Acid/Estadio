@@ -7,12 +7,14 @@ package vista;
 
 
 
+import controllers.PartidoJpaController;
 import entities.EquipoPais;
 import entities.Partido;
 import java.awt.Event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -1644,6 +1646,7 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        mostrarPartidos();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
@@ -1808,10 +1811,22 @@ public class Ventana extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     
+    private void mostrarPartidos() {
+        
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        for(Partido par: partidos)
+        {
+            System.out.println(par.getCodEquipoLocal() + " - " + par.getCodEquipoVisitante());
+        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Ventana view = new Ventana();
+        view.mostrarPartidos();
     }
+
 }
