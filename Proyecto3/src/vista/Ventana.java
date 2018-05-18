@@ -25,7 +25,10 @@ public class Ventana extends javax.swing.JFrame {
      */
     public static String fecha;
     public Ventana() {
-        jTabbedPane1.setSelectedIndex(4);        
+        initComponents();
+        jTabbedPane1.setSelectedIndex(4);
+        setVisible(true);
+        setResizable(false);
     }
 
     /**
@@ -1809,6 +1812,6 @@ public class Ventana extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Ventana vista = new Ventana();
+        Ventana view = new Ventana();
     }
 }
