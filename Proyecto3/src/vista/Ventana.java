@@ -30,7 +30,7 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         jTabbedPane1.setSelectedIndex(4);
-        //inicializar();
+        inicializar();
         setResizable(false);
         setVisible(true);
     }
@@ -242,7 +242,7 @@ public class Ventana extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(299, 299, 299)
                         .addComponent(jButton24)))
