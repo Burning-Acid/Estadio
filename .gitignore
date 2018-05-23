@@ -1,8 +1,8 @@
 /Proyecto3/nbproject/private
 /Proyecto3/src/META-INF/persistence.xml
 /Proyecto3/build/classes/META-INF/persistence.xml
-/Proyecto3/build/classes
-/Proyecto3/build
+/Proyecto3/build/
+!/Proyecto3/build/classes/vista
 
 *.class
 /Proyecto3/dist/
