@@ -9,8 +9,7 @@ package vista;
 
 import controllers.EquipoPaisJpaController;
 import controllers.PartidoJpaController;
-import entities.EquipoPais;
-import entities.Partido;
+import entities.*;
 import java.awt.Event;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,6 +19,7 @@ import java.util.Iterator;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -348,31 +348,24 @@ public class Ventana extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "", "Partido", "Fecha", "Estadio", "Ciudad", "Equipos", "Horario"
+                "Partido", "Fecha", "Estadio", "Ciudad", "Equipos", "Horario"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jButton26.setText("Regresar");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
@@ -396,7 +389,6 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(jButton13)
                         .addGap(89, 89, 89)
                         .addComponent(jButton26))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
@@ -409,8 +401,9 @@ public class Ventana extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel88, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel87, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(180, Short.MAX_VALUE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1844,6 +1837,29 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
+    private void updateTablaBoleteria()
+    {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        DateFormat dia = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat hora = new SimpleDateFormat("HH:mm");
+        
+        while(modelo.getRowCount()!=0)
+        {
+            modelo.removeRow(0);
+        }
+        for(int i=0 ; i<partidos.size() ; ++i)
+        {
+            Partido par = partidos.get(i);
+            Date fecha = par.getFecha();
+            Estadio est = par.getCodEstadio();
+            EquipoPais local = par.getCodEquipoLocal();
+            EquipoPais visitante = par.getCodEquipoVisitante();
+            modelo.addRow(new Object[]{par.getNumPartido(), dia.format(fecha), est.getNombre(), est.getCiudad(), local.getNombre() + " - " + visitante.getNombre(), hora.format(fecha)});
+        }
+    }
+    
     private void actualizarHora()
     {
         DateFormat dia = new SimpleDateFormat("dd/MM/yyyy");
@@ -1875,6 +1891,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         }
         actualizarHora();
+        updateTablaBoleteria();
     }
     
     /**
