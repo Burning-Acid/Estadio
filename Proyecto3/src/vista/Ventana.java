@@ -9,12 +9,14 @@ package vista;
 
 import controllers.EquipoPaisJpaController;
 import controllers.PartidoJpaController;
+import controllers.SillaJpaController;
 import entities.*;
 import java.awt.Event;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,7 +40,6 @@ public class Ventana extends javax.swing.JFrame {
         setResizable(false);
         setVisible(true);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -362,10 +363,8 @@ public class Ventana extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jButton26.setText("Regresar");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
@@ -1546,25 +1545,9 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        String hora;
-        String minuto;
-        String dia;
-        String mes;
-        String año;
-        LocalDateTime now = LocalDateTime.now();
-	hora = Integer.toString(now.getHour());
-        if(now.getMinute()<10)
-            minuto = "0"+Integer.toString(now.getMinute());
-        else
-            minuto = Integer.toString(now.getMinute());
-        hora=hora + ":" + minuto;
-        dia=Integer.toString(now.getDayOfMonth());
-        mes=now.getMonth().toString();
-        año=Integer.toString(now.getYear());
-        año=dia+ " de " + mes + " de " + año;
-        fecha=año+ " " + hora;
-        jLabel86.setText(fecha);
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        calcularDisponibilidad(partidos.get(jTable1.getSelectedRow()));
         jTabbedPane1.setSelectedIndex(7);
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -1836,7 +1819,34 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
-
+    
+    
+    private void calcularDisponibilidad(Partido _partido)
+    {
+        //Creamos las variables necearias y la lista de sillas totales
+        SillaJpaController controSilla = new SillaJpaController();
+        Estadio est = _partido.getCodEstadio();
+        List<Silla> sillas = controSilla.findSillaEntities();
+        ArrayList<Silla> sillasDisponibles = new ArrayList<Silla>();
+        
+        
+       //En este for escogemos las sillas que son de este partido y que están disponibles
+        for(Silla sil: sillas)
+        {
+            if(sil.getPartido() == _partido && sil.getEstado() == "DISPONIBLE")
+            {
+                sillasDisponibles.add(sil);
+            }
+        }
+        
+        //Asignamos los valores a las labels 
+        jLabel25.setText(est.getNombre());
+        jLabel26.setText(Short.toString(_partido.getNumPartido()));
+        jLabel27.setText(Integer.toString(sillasDisponibles.size()));
+        
+        
+    }
+    
     private void updateTablaBoleteria()
     {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
@@ -1849,6 +1859,7 @@ public class Ventana extends javax.swing.JFrame {
         {
             modelo.removeRow(0);
         }
+        
         for(int i=0 ; i<partidos.size() ; ++i)
         {
             Partido par = partidos.get(i);
@@ -1856,7 +1867,10 @@ public class Ventana extends javax.swing.JFrame {
             Estadio est = par.getCodEstadio();
             EquipoPais local = par.getCodEquipoLocal();
             EquipoPais visitante = par.getCodEquipoVisitante();
-            modelo.addRow(new Object[]{par.getNumPartido(), dia.format(fecha), est.getNombre(), est.getCiudad(), local.getNombre() + " - " + visitante.getNombre(), hora.format(fecha)});
+            if(local.getCodEquipo() <=32 && visitante.getCodEquipo()<=32)
+            {
+                modelo.addRow(new Object[]{par.getNumPartido(), dia.format(fecha), est.getNombre(), est.getCiudad(), local.getNombre() + " - " + visitante.getNombre(), hora.format(fecha)});
+            }
         }
     }
     
@@ -1879,7 +1893,7 @@ public class Ventana extends javax.swing.JFrame {
         System.out.println(controPartido.getPartidoCount());
         
         
-        for(int i=1 ; i<partidos.size() ; ++i)
+        for(int i=1 ; i<=partidos.size() ; ++i)
         {
             Partido par = partidos.get(i-1);
             EquipoPais local = par.getCodEquipoLocal();
