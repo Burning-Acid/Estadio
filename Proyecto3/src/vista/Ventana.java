@@ -12,11 +12,15 @@ import controllers.PartidoJpaController;
 import entities.EquipoPais;
 import entities.Partido;
 import java.awt.Event;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -1417,9 +1421,9 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel89.setText("Equipo Visitante");
 
-        jLabel90.setText("jLabel90");
+        jLabel90.setText("-");
 
-        jLabel91.setText("jLabel91");
+        jLabel91.setText("-");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1436,16 +1440,13 @@ public class Ventana extends javax.swing.JFrame {
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addGap(20, 20, 20)
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel91)
-                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                                    .addComponent(jLabel89)
-                                                    .addGap(131, 131, 131))
-                                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                                    .addComponent(jLabel88, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel90)))))
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel89)
+                                            .addComponent(jLabel88))
+                                        .addGap(57, 57, 57)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel90, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                                            .addComponent(jLabel91, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addComponent(jLabel87, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -1661,7 +1662,7 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        detallesPartido();
         jTabbedPane1.setSelectedIndex(12);
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1896,6 +1897,39 @@ public class Ventana extends javax.swing.JFrame {
         }else{
             jButton1.setEnabled(false);
         }
+    }
+
+    private void detallesPartido() {
+        
+        String sel = (String) jComboBox1.getSelectedItem();
+        String parte[] = sel.split("[.-]");
+        //System.out.println("Parte 1 " + parte[0].toString());
+        //System.out.println("Parte 2 " + parte[1].toString());
+        //System.out.println("Parte 3 " + parte[2].toString());
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        DateFormat dia = new SimpleDateFormat("dd/MM/YYYY");
+        DateFormat hora = new SimpleDateFormat("HH:mm");
+        
+        while(modelo.getRowCount() !=0){
+            modelo.removeRow(0);
+        }
+        
+        for(int i=0; i < partidos.size(); i++){
+        
+            if(String.valueOf(partidos.get(i).getNumPartido()).equals(parte[0])){
+                
+                Date fecha = partidos.get(i).getFecha();
+
+                modelo.addRow(new Object [] {"Número partido",parte[0]});
+                modelo.addRow(new Object [] {"Fecha" , dia.format(fecha)});
+                modelo.addRow(new Object [] {"Hora" , hora.format(fecha)});
+                modelo.addRow(new Object [] {"Equipo Local" , parte[1]});
+                modelo.addRow(new Object [] {"Equipo Visitante" , parte[2]});
+            
+            }
+        }        
     }
 
 }
