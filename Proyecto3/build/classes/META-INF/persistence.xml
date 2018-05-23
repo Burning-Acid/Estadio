@@ -26,6 +26,7 @@
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.logging.parameters" value="true"/>
       
+      <property name="" value=""/>
     </properties>
   </persistence-unit>
 </persistence>

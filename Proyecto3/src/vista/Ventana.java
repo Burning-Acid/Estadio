@@ -239,12 +239,10 @@ public class Ventana extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(76, 76, 76)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(85, 85, 85))
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(299, 299, 299)
                         .addComponent(jButton24)))
@@ -1828,11 +1826,8 @@ public class Ventana extends javax.swing.JFrame {
             Partido par = partidos.get(i-1);
             EquipoPais local = par.getCodEquipoLocal();
             EquipoPais visitante = par.getCodEquipoVisitante();
-            if(local.getCodEquipo() <= 32 && visitante.getCodEquipo() <=32)
-            {
-                String auxiliar = i + ". " + local.getNombre() + " - " + visitante.getNombre();
-                jComboBox1.addItem(auxiliar);
-            }
+            String auxiliar = i + ". " + local.getNombre() + " - " + visitante.getNombre();
+            jComboBox1.addItem(auxiliar);
         }
         
     }
