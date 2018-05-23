@@ -30,7 +30,7 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
         jTabbedPane1.setSelectedIndex(4);
-        inicializar();
+        //inicializar();
         setResizable(false);
         setVisible(true);
     }
