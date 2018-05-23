@@ -21,6 +21,8 @@ import java.util.Iterator;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -735,12 +737,15 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel23.setText("Partido");
 
-        jLabel24.setText("Entradas disponibilidad");
+        jLabel24.setText("Entradas disponibles");
 
+        jLabel25.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel25.setText("jLabel25");
 
+        jLabel26.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel26.setText("jLabel26");
 
+        jLabel27.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel27.setText("jLabel27");
 
         jButton14.setText("Solicitar entradas en categoria");
@@ -759,22 +764,29 @@ public class Ventana extends javax.swing.JFrame {
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Categoria", "Precio", "Entradas Disponibles"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable7.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable7);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
@@ -783,23 +795,21 @@ public class Ventana extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel23))
-                                .addGap(219, 219, 219)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
-                                    .addComponent(jLabel25)))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addComponent(jButton14)
                                 .addGap(196, 196, 196)
                                 .addComponent(jButton15))
+                            .addComponent(jScrollPane3)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addGap(145, 145, 145)
-                                .addComponent(jLabel27))
-                            .addComponent(jScrollPane3))))
-                .addContainerGap(240, Short.MAX_VALUE))
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel23)
+                                    .addComponent(jLabel24))
+                                .addGap(56, 56, 56)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(240, 240, 240))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -819,8 +829,8 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27))
                 .addGap(35, 35, 35)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton14)
                     .addComponent(jButton15))
@@ -1494,25 +1504,6 @@ public class Ventana extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        String hora;
-        String minuto;
-        String dia;
-        String mes;
-        String año;
-	LocalDateTime now = LocalDateTime.now();
-	hora = Integer.toString(now.getHour());
-        if(now.getMinute()<10)
-            minuto = "0"+Integer.toString(now.getMinute());
-        else
-            minuto = Integer.toString(now.getMinute());
-        hora=hora + ":" + minuto;
-        dia=Integer.toString(now.getDayOfMonth());
-        mes=now.getMonth().toString();
-        año=Integer.toString(now.getYear());
-        año=dia+ " de " + mes + " de " + año;
-        jLabel18.setText(año);
-        jLabel19.setText(hora);
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1833,7 +1824,7 @@ public class Ventana extends javax.swing.JFrame {
        //En este for escogemos las sillas que son de este partido y que están disponibles
         for(Silla sil: sillas)
         {
-            if(sil.getPartido() == _partido && sil.getEstado() == "DISPONIBLE")
+            if(sil.getPartido().getNumPartido() == _partido.getNumPartido() && sil.getEstado().equals("DISPONIBLE"))
             {
                 sillasDisponibles.add(sil);
             }
@@ -1844,7 +1835,23 @@ public class Ventana extends javax.swing.JFrame {
         jLabel26.setText(Short.toString(_partido.getNumPartido()));
         jLabel27.setText(Integer.toString(sillasDisponibles.size()));
         
-        
+        //Ahora llenamos la tabla con los datos de las sillas disponibles
+        DefaultTableModel modelo = (DefaultTableModel)jTable7.getModel();
+        ArrayList<Integer> lista = new ArrayList<Integer>(4);
+        ArrayList<Integer> precio = new ArrayList<Integer>(4);
+        for(Integer in: lista)
+        {
+            in = 0;
+        }
+        for(Silla sil: sillasDisponibles)
+        {
+            lista.set(sil.getCategoria()-1, lista.get(sil.getCategoria()-1)+1);
+            precio.set(sil.getCategoria()-1, sil.getPrecio());
+        }
+        modelo.addRow(new Object[]{1, precio.get(0), lista.get(0)});
+        modelo.addRow(new Object[]{2, precio.get(1), lista.get(1)});
+        modelo.addRow(new Object[]{3, precio.get(2), lista.get(2)});
+        modelo.addRow(new Object[]{4, precio.get(3), lista.get(3)});
     }
     
     private void updateTablaBoleteria()
