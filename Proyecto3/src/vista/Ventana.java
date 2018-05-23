@@ -1826,8 +1826,11 @@ public class Ventana extends javax.swing.JFrame {
             Partido par = partidos.get(i-1);
             EquipoPais local = par.getCodEquipoLocal();
             EquipoPais visitante = par.getCodEquipoVisitante();
-            String auxiliar = i + ". " + local.getNombre() + " - " + visitante.getNombre();
-            jComboBox1.addItem(auxiliar);
+            if(local.getCodEquipo() <=32 && visitante.getCodEquipo()<=32)
+            {
+                String auxiliar = i + ". " + local.getNombre() + " - " + visitante.getNombre();
+                jComboBox1.addItem(auxiliar);
+            }
         }
         
     }
