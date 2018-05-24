@@ -14,6 +14,7 @@ import entities.EquipoPais;
 import entities.Jugador;
 import entities.Partido;
 import java.awt.Event;
+import static java.lang.Short.parseShort;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -479,12 +480,22 @@ public class Ventana extends javax.swing.JFrame {
         jLabel7.setText("Equipo");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Jugador");
 
         jLabel9.setText("Minuto");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Agregar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -1700,6 +1711,14 @@ public class Ventana extends javax.swing.JFrame {
         revisar();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        jugadoresEquipo();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1942,24 +1961,29 @@ public class Ventana extends javax.swing.JFrame {
         
         PartidoJpaController controPartido = new PartidoJpaController();
         List<Partido> partidos = controPartido.findPartidoEntities();
-        JugadorJpaController controJugador = new JugadorJpaController();
-        List<Jugador> jugadores = controJugador.findJugadorEntities();
         String numP =  (String) jTable2.getValueAt(0,1);
-        System.out.println("numP" + numP);
+        //System.out.println("numP" + numP);
         jTextField1.setText(numP);
         jComboBox2.removeAllItems();
         jComboBox2.addItem("Seleccionar");
         
-        for(int i=0; i < partidos.size(); i++){
+        Partido part = controPartido.findPartido(parseShort(numP));
+
+        String ELocal = part.getCodEquipoLocal().getNombre();
+        String EVisitante = part.getCodEquipoVisitante().getNombre();;
             
-            if (String.valueOf(partidos.get(i).getNumPartido()).equals(numP)){
-                
-                String ELocal = partidos.get(i).getCodEquipoLocal().getNombre();
-                String EVisitante = partidos.get(i).getCodEquipoVisitante().getNombre();;
+        jComboBox2.addItem(ELocal);
+        jComboBox2.addItem(EVisitante);   
+ 
+    }
+
+    private void jugadoresEquipo() {
+        
+        int equipSel = jComboBox2.getSelectedIndex();
+        
+        
+        if(jComboBox2.getSelectedIndex() > 0){
             
-                jComboBox2.addItem(ELocal);
-                jComboBox2.addItem(EVisitante);   
-            }
         }
     }
 }
