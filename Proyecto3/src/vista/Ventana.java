@@ -11,6 +11,7 @@ import controllers.EquipoPaisJpaController;
 import controllers.PartidoJpaController;
 import controllers.SillaJpaController;
 import entities.*;
+import java.awt.Component;
 import java.awt.Event;
 import static java.lang.Integer.parseInt;
 import java.text.DateFormat;
@@ -23,7 +24,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -1423,23 +1427,24 @@ public class Ventana extends javax.swing.JFrame {
                 "Fila / Silla", "A", "B"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return false;
             }
         });
+        jTable8.getColumnModel().getColumn(1).setCellRenderer(new ConditionalCheckBoxRenderer());
+        jTable8.getColumnModel().getColumn(2).setCellRenderer(new ConditionalCheckBoxRenderer());
+        jTable8.setColumnSelectionAllowed(true);
         jTable8.getTableHeader().setReorderingAllowed(false);
+        jTable8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable8MouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable8MouseReleased(evt);
+            }
+        });
         jScrollPane7.setViewportView(jTable8);
+        jTable8.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jButton16.setText("Comprar");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
@@ -1528,7 +1533,7 @@ public class Ventana extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -1588,7 +1593,7 @@ public class Ventana extends javax.swing.JFrame {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         int categoria = jTable7.getSelectedRow()+1;
         updateSeleccion(categoria, parseInt(jLabel26.getText()));
-        jTabbedPane1.setSelectedIndex(8);
+        jTabbedPane1.setSelectedIndex(12);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
@@ -1610,6 +1615,7 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        updateInformacionPago();
         jTabbedPane1.setSelectedIndex(8);
     }//GEN-LAST:event_jButton16ActionPerformed
 
@@ -1697,10 +1703,18 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jTable7MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable7MouseReleased
         if(jTable7.getSelectedRowCount()!=1 || (int)jTable7.getModel().getValueAt(jTable7.getSelectedRow(), 2)==0)
-        jButton14.setEnabled(false);
+            jButton14.setEnabled(false);
         else
-        jButton14.setEnabled(true);
+            jButton14.setEnabled(true);
     }//GEN-LAST:event_jTable7MouseReleased
+
+    private void jTable8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable8MouseClicked
+
+    private void jTable8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MouseReleased
+        manejoTabla8();
+    }//GEN-LAST:event_jTable8MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1864,6 +1878,65 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+    private void manejoTabla8()
+    {
+        if(jTable8.getSelectedRowCount()==1)
+        {
+            int row = jTable8.getSelectedRow();
+            int column = jTable8.getSelectedColumn();
+            int valor = (Integer)jTable8.getValueAt(row, column);
+            if(valor!=0 && column!=0)
+            {
+                if(valor==2)
+                {
+                    jTable8.setValueAt(1, row, column);
+                }
+                else
+                {
+                    jTable8.setValueAt(2, row, column);
+                }
+            }
+        }
+        int count = 0;
+        for(int i=0 ;  i<jTable8.getRowCount() ; ++i)
+        {
+            for(int j = 1 ; j<jTable8.getColumnCount() ; ++j)
+            {
+                int valor = (Integer)jTable8.getValueAt(i, j);
+                
+                if(valor == 2)
+                    count++;
+            }
+        }
+        if(count!=0)
+        {
+            jButton16.setEnabled(true);
+        }
+        else
+        {
+            jButton16.setEnabled(false);
+        }
+    }
+    
+    private void updateInformacionPago()
+    {
+        SillaJpaController controSilla = new SillaJpaController();
+        int numPartido = parseInt(jLabel31.getText());
+        List<Silla> sillas = controSilla.findSillaEntities();
+        ArrayList<Silla> sillasReservadas = new ArrayList<>();
+        for(Silla sil: sillas)
+        {
+            SillaPK PK = sil.getSillaPK();
+            if(PK.getNumPartido() == numPartido)
+            {
+                int valor = (Integer)jTable8.getValueAt(PK.getNumFila()-1, PK.getNumAsiento());
+                if(valor==2)
+                {
+                    sillasReservadas.add(sil);
+                }
+            }
+        }
+    }
     
     private void updateSeleccion(int _categoria, int _partido)
     {
@@ -1898,16 +1971,15 @@ public class Ventana extends javax.swing.JFrame {
             modelo.removeRow(0);
         for(int i=0 ; i<4 ; ++i)
         {
-            Boolean s1;
-            Boolean s2;
+            Integer s1, s2;
             if(mat[i][0])
-                s1 = false;
+                s1 = 1;
             else
-                s1 = null;
+                s1 = 0;
             if(mat[i][1])
-                s2 = false;
+                s2 = 1;
             else
-                s2 = null;
+                s2 = 0;
             modelo.addRow(new Object[]{i+1, s1, s2});
         }
     }
@@ -2015,6 +2087,7 @@ public class Ventana extends javax.swing.JFrame {
                 jComboBox1.addItem(auxiliar);
             }
         }
+        jButton16.setEnabled(false);
         jButton13.setEnabled(false);
         jButton14.setEnabled(false);
         actualizarHora();
