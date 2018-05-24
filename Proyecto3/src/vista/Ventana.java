@@ -28,6 +28,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -857,15 +859,20 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Disponiblidad de entradas", jPanel9);
 
-        jLabel50.setText("Nombre");
+        jLabel50.setText("Nombre(s)");
 
-        jLabel52.setText("Apellido");
+        jLabel52.setText("Apellido(s)");
 
-        jLabel53.setText("Pasaporte Numero");
+        jLabel53.setText("Número pasaporte");
 
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
+            }
+        });
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
             }
         });
 
@@ -895,45 +902,45 @@ public class Ventana extends javax.swing.JFrame {
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(213, 213, 213)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
+                    .addComponent(jLabel50)
+                    .addComponent(jButton20)
+                    .addComponent(jLabel52)
+                    .addComponent(jLabel53))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField7)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel50)
-                            .addComponent(jLabel52)
-                            .addComponent(jLabel53)))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(jButton20)))
-                .addGap(54, 54, 54)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton21)
-                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField7)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                        .addComponent(jTextField5)))
-                .addContainerGap(258, Short.MAX_VALUE))
+                            .addComponent(jButton21, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)))))
+                .addGap(239, 239, 239))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addGap(61, 61, 61)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel52)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel53)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
                     .addComponent(jButton21))
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informacion del Cliente", jPanel12);
@@ -1098,7 +1105,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel57)
                     .addComponent(jLabel63)
                     .addComponent(jLabel66))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(111, 111, 111)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel58)
                     .addComponent(jLabel59)
@@ -1420,6 +1427,28 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField4KeyTyped(evt);
+            }
+        });
+
         jButton18.setText("Pagar");
         jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1440,11 +1469,6 @@ public class Ventana extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel46)
-                            .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(218, 218, 218)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1486,8 +1510,13 @@ public class Ventana extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(168, Short.MAX_VALUE))
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel46)
+                            .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1512,11 +1541,11 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(jLabel45))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel46)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
                     .addComponent(jLabel48))
@@ -1615,11 +1644,11 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        jRadioButton1.setSelected(false);
+        seleccionarTarjeta();
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        jRadioButton2.setSelected(false);
+        seleccionarEfectivo();
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
@@ -1644,16 +1673,17 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        llenarComprobante();
         if(jTextField5.getText().length()!=0 && jTextField6.getText().length()!=0 && jTextField7.getText().length()!=0){
             jLabel56.setText(jTextField5.getText());
             jLabel57.setText(jTextField6.getText());
             jLabel59.setText(jTextField7.getText());
-            jTabbedPane1.setSelectedIndex(11);
         }
+        jTabbedPane1.setSelectedIndex(9);
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        jTabbedPane1.setSelectedIndex(10);
+        jTabbedPane1.setSelectedIndex(8); //Este debería ir a Informacion Usuario
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -1727,6 +1757,26 @@ public class Ventana extends javax.swing.JFrame {
     private void jTable8MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MouseReleased
         manejoTabla8();
     }//GEN-LAST:event_jTable8MouseReleased
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        efectivoInsertado();
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        tarjetaInsertada();
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        efectivoInsertado();
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+        tarjetaInsertada();
+    }//GEN-LAST:event_jTextField4KeyTyped
+
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        comprobarDatos();
+    }//GEN-LAST:event_jTextField5KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1890,6 +1940,133 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarComprobante()
+    {
+        
+    }
+    
+    private void comprobarDatos()
+    {
+        if()
+    }
+    
+    private void efectivoInsertado()
+    {        
+        if(jRadioButton1.isSelected())
+        {
+            String texto = jTextField3.getText();
+            jButton18.setEnabled(true);
+            for(int i=0 ; i<texto.length() ; ++i)
+            {
+                if(texto.charAt(i)<0 || texto.charAt(i)>9)
+                {
+                    jButton18.setEnabled(false);
+                }
+            }
+            if(texto.length()==0)
+            {
+                jButton18.setEnabled(false);
+                return;
+            }
+            String precio = jLabel48.getText();
+            precio = precio.substring(1);
+            if(parseInt(jTextField3.getText())>=parseInt(precio))
+            {
+                jButton18.setEnabled(true);
+            }
+            else
+            {
+                jButton18.setEnabled(false);
+            }
+        }
+    }
+    
+    private void tarjetaInsertada()
+    {
+        if(jRadioButton2.isSelected())
+        {
+            String texto = jTextField4.getText();
+            jButton18.setEnabled(true);
+            for(int i=0 ; i<texto.length() ; ++i)
+            {
+                if(texto.charAt(i)<0 || texto.charAt(i)>9)
+                {
+                    jButton18.setEnabled(false);
+                }
+            }
+            if(jTextField4.getText().length() >= 5)
+            {
+                jButton18.setEnabled(true);
+            }
+            else
+            {
+                jButton18.setEnabled(false);
+            }
+        }
+    }
+    
+    private void seleccionarEfectivo()
+    {
+        jRadioButton2.setSelected(false);
+        if(!jRadioButton1.isSelected())
+        {
+            jButton18.setEnabled(false);
+            return;
+        }
+        String texto = jTextField3.getText();
+        jButton18.setEnabled(true);
+        for(int i=0 ; i<texto.length() ; ++i)
+        {
+            if(texto.charAt(i)<0 || texto.charAt(i)>9)
+            {
+                jButton18.setEnabled(false);
+            }
+        }
+        if(texto.length()==0)
+        {
+            jButton18.setEnabled(false);
+            return;
+        }
+        String precio = jLabel48.getText();
+        precio = precio.substring(1);
+        if(parseInt(jTextField3.getText())>=parseInt(precio))
+        {
+            jButton18.setEnabled(true);
+        }
+        else
+        {
+            jButton18.setEnabled(false);
+        }
+    }
+    
+    private void seleccionarTarjeta()
+    {
+        jRadioButton1.setSelected(false);
+        if(!jRadioButton2.isSelected())
+        {
+            jButton18.setEnabled(false);
+            return;
+        }
+        String texto = jTextField4.getText();
+        jButton18.setEnabled(true);
+        for(int i=0 ; i<texto.length() ; ++i)
+        {
+            if(texto.charAt(i)<0 || texto.charAt(i)>9)
+            {
+                jButton18.setEnabled(false);
+            }
+        }
+        if(jTextField4.getText().length() >= 5)
+        {
+            jButton18.setEnabled(true);
+        }
+        else
+        {
+            jButton18.setEnabled(false);
+        }
+    }
+    
     private void manejoTabla8()
     {
         if(jTable8.getSelectedRowCount()==1)
@@ -2127,6 +2304,7 @@ public class Ventana extends javax.swing.JFrame {
                 jComboBox1.addItem(auxiliar);
             }
         }
+        jButton18.setEnabled(false);
         jButton16.setEnabled(false);
         jButton13.setEnabled(false);
         jButton14.setEnabled(false);
