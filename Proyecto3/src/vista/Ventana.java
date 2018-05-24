@@ -8,14 +8,17 @@ package vista;
 
 
 import controllers.EquipoPaisJpaController;
+import controllers.GrupoJpaController;
 import controllers.PartidoJpaController;
 import entities.EquipoPais;
+import entities.Gol;
 import entities.Partido;
 import java.awt.Event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +30,7 @@ public class Ventana extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     public static String fecha;
+    public static Boolean bandera=false;
     public Ventana() {
         initComponents();
         jTabbedPane1.setSelectedIndex(4);
@@ -261,7 +265,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(97, 97, 97)
                 .addComponent(jButton24)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar Encuentro", jPanel1);
@@ -322,7 +326,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
                     .addComponent(jButton25))
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(523, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Generar Partidos de II Fase", jPanel2);
@@ -402,7 +406,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton13)
                     .addComponent(jButton26))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Venta de Boletería ", jPanel3);
@@ -644,7 +648,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar Anotacion", jPanel6);
@@ -701,7 +705,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jButton23)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Programación", jPanel8);
@@ -1162,7 +1166,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
                     .addComponent(jButton21))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informacion del Cliente", jPanel12);
@@ -1401,15 +1405,23 @@ public class Ventana extends javax.swing.JFrame {
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Grupo", "Posicion", "Equipo", "PG", "PE"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane10.setViewportView(jTable5);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -1506,17 +1518,120 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-
+            
             if((String)jComboBox4.getSelectedItem()=="Cuartos de Final"){
                 jLabel20.setText("Cuartos de Final");
             }
             else{
+                bandera=true;
                 jLabel20.setText("Octavos de Final");
+                
             }
-            jTabbedPane1.setSelectedIndex(12);
-        
+            if(bandera==true)
+                jTabbedPane1.setSelectedIndex(12);
+            else{
+                JOptionPane.showMessageDialog(jPanel2, "Partidos de octavos de final no se han generado");
+            }
     }//GEN-LAST:event_jButton9ActionPerformed
-
+    private static int calcularPartidosGanados(EquipoPais   e){
+        int partidosG=0;
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        for(int i=1;i<partidos.size();i++){
+            Partido par=partidos.get(i-1);
+            if(e.getCodEquipo()==(int)par.getCodEquipoVisitante().getCodEquipo() || 
+                    (int)par.getCodEquipoLocal().getCodEquipo()==e.getCodEquipo()){
+                if(verificarGanado(par, e.getCodEquipo())){
+                    partidosG++;
+                }
+            }
+        }
+        return partidosG;
+    }
+    private static Boolean verificarGanado(Partido par,int codigo){
+        int golesEq=0;
+        int golesP=0;
+        List<Gol> goles =par.getGolList();
+        for(int i=1;i<goles.size();++i){
+            Gol go=goles.get(i-1);
+            if(go.getJugador().getEquipoPais().getCodEquipo()==codigo){
+                golesEq++;
+            }
+            else{
+                golesP++;
+            }
+        }
+        if(golesEq>golesP){
+            return true;
+        }
+        return false;
+    }
+    private static int calcularPartidosPerdidos(EquipoPais e){
+        int partidosP=0;
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        for(int i=1;i<partidos.size();i++){
+            Partido par=partidos.get(i-1);
+            if(e.getCodEquipo()==(int)par.getCodEquipoVisitante().getCodEquipo() || 
+                    (int)par.getCodEquipoLocal().getCodEquipo()==e.getCodEquipo()){
+                if(verificarGanado(par, e.getCodEquipo())){
+                    partidosP++;
+                }
+            }
+        }
+        return partidosP;
+    }
+     private static Boolean verificarPerdido(Partido par,int codigo){
+        int golesEq=0;
+        int golesP=0;
+        List<Gol> goles =par.getGolList();
+        for(int i=1;i<goles.size();++i){
+            Gol go=goles.get(i-1);
+            if(go.getJugador().getEquipoPais().getCodEquipo()==codigo){
+                golesEq++;
+            }
+            else{
+                golesP++;
+            }
+        }
+        if(golesEq<golesP){
+            return true;
+        }
+        return false;
+    }
+        private static int calcularPartidosEmpatados(EquipoPais e){
+        int partidosE=0;
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        for(int i=1;i<partidos.size();i++){
+            Partido par=partidos.get(i-1);
+            if(e.getCodEquipo()==(int)par.getCodEquipoVisitante().getCodEquipo() || 
+                    (int)par.getCodEquipoLocal().getCodEquipo()==e.getCodEquipo()){
+                if(verificarGanado(par, e.getCodEquipo())){
+                    partidosE++;
+                }
+            }
+        }
+        return partidosE;
+    }
+     private static Boolean verificarEmpatado(Partido par,int codigo){
+        int golesEq=0;
+        int golesP=0;
+        List<Gol> goles =par.getGolList();
+        for(int i=1;i<goles.size();++i){
+            Gol go=goles.get(i-1);
+            if(go.getJugador().getEquipoPais().getCodEquipo()==codigo){
+                golesEq++;
+            }
+            else{
+                golesP++;
+            }
+        }
+        if(golesEq==golesP){
+            return true;
+        }
+        return false;
+    }
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
             jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -1818,7 +1933,6 @@ public class Ventana extends javax.swing.JFrame {
         
         PartidoJpaController controPartido = new PartidoJpaController();
         List<Partido> partidos = controPartido.findPartidoEntities();
-        System.out.println(controPartido.getPartidoCount());
         
         
         for(int i=1 ; i<partidos.size() ; ++i)
@@ -1832,6 +1946,7 @@ public class Ventana extends javax.swing.JFrame {
                 jComboBox1.addItem(auxiliar);
             }
         }
+        
         
     }
     
