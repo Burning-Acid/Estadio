@@ -34,8 +34,11 @@ public class Ventana extends javax.swing.JFrame {
      * Creates new form Ventana
      */
     public static String fecha;
+    private Integer actual;
     public Ventana() {
+        actual = 0;
         initComponents();
+        actual = 3;
         jTabbedPane1.setSelectedIndex(3);
         inicializar();
         setResizable(false);
@@ -213,6 +216,12 @@ public class Ventana extends javax.swing.JFrame {
         jLabel91 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Seleccionar Partido");
 
@@ -1536,15 +1545,18 @@ public class Ventana extends javax.swing.JFrame {
         jLabel18.setText(año);
         jLabel19.setText(hora);
         jTabbedPane1.setSelectedIndex(2);
+        actual = 2;
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         jTabbedPane1.setSelectedIndex(0);
+        actual = 0;
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         jTabbedPane1.setSelectedIndex(1);
+        actual = 1;
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
@@ -1560,11 +1572,12 @@ public class Ventana extends javax.swing.JFrame {
                 jLabel20.setText("Octavos de Final");
             }
             jTabbedPane1.setSelectedIndex(12);
-        
+            actual = 12;
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
             jTabbedPane1.setSelectedIndex(1);
+            actual = 1;
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1588,27 +1601,33 @@ public class Ventana extends javax.swing.JFrame {
         fecha=año+ " " + hora;
         jLabel86.setText(fecha);
         jTabbedPane1.setSelectedIndex(7);
+        actual = 7;
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         llenarCampos();
         jTabbedPane1.setSelectedIndex(4);
+        actual = 4;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         jTabbedPane1.setSelectedIndex(6);
+        actual = 6;
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         jTabbedPane1.setSelectedIndex(2);
+        actual = 2;
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         jTabbedPane1.setSelectedIndex(8);
+        actual = 8;
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         jTabbedPane1.setSelectedIndex(7);
+        actual = 7;
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -1623,10 +1642,12 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         jTabbedPane1.setSelectedIndex(8);
+        actual = 8;
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         jTabbedPane1.setSelectedIndex(9);
+        actual = 9;
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
@@ -1639,6 +1660,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         jTabbedPane1.setSelectedIndex(9);
+        actual = 9;
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
@@ -1647,58 +1669,74 @@ public class Ventana extends javax.swing.JFrame {
             jLabel57.setText(jTextField6.getText());
             jLabel59.setText(jTextField7.getText());
             jTabbedPane1.setSelectedIndex(11);
+            actual = 11;
         }
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         jTabbedPane1.setSelectedIndex(10);
+        actual = 10;
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         jTabbedPane1.setSelectedIndex(2);
+        actual = 2;
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         jTabbedPane1.setSelectedIndex(12);
+        actual = 12;
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jTabbedPane1.setSelectedIndex(0);
+        actual = 0;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         detallesPartido();
         jTabbedPane1.setSelectedIndex(12);
+        actual = 12;
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         jTabbedPane1.setSelectedIndex(3);
+        actual =3;
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         jTabbedPane1.setSelectedIndex(4);
+        actual = 4;
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
         jTabbedPane1.setSelectedIndex(4);
+        actual = 4;
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jTabbedPane1.setSelectedIndex(3);
+        actual = 3;
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jTabbedPane1.setSelectedIndex(3);
+        actual = 3;
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         jTabbedPane1.setSelectedIndex(12);
+        actual = 12;
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         revisar();
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        jTabbedPane1.setSelectedIndex(actual);
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
