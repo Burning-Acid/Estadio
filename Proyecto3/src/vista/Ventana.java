@@ -1947,7 +1947,8 @@ public class Ventana extends javax.swing.JFrame {
         String numP =  (String) jTable2.getValueAt(0,1);
         System.out.println("numP" + numP);
         jTextField1.setText(numP);
-        
+        jComboBox2.removeAllItems();
+        jComboBox2.addItem("Seleccionar");
         
         for(int i=0; i < partidos.size(); i++){
             
