@@ -5,6 +5,7 @@
  */
 package entities;
 
+import static com.oracle.jrockit.jfr.ContentType.Bytes;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import static sun.security.krb5.Confounder.bytes;
 
 /**
  *
@@ -44,7 +46,7 @@ public class Jugador implements Serializable {
     private String apellidos;
     @Lob
     @Column(name = "FOTO")
-    private Serializable foto;
+    private byte [] foto;
     @JoinTable(name = "CLUBJUGADOR", joinColumns = {
         @JoinColumn(name = "COD_EQUIPO", referencedColumnName = "NUM_JUGADOR")
         , @JoinColumn(name = "NUM_JUGADOR", referencedColumnName = "COD_EQUIPO")}, inverseJoinColumns = {
@@ -96,11 +98,11 @@ public class Jugador implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public Serializable getFoto() {
+    public byte [] getFoto() {
         return foto;
     }
 
-    public void setFoto(Serializable foto) {
+    public void setFoto(byte [] foto) {
         this.foto = foto;
     }
 
