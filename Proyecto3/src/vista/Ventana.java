@@ -1540,13 +1540,23 @@ public class Ventana extends javax.swing.JFrame {
                 DefaultTableModel table = (DefaultTableModel) jTable6.getModel();
                 PartidoJpaController controPartido = new PartidoJpaController();
                 List<Partido> partidos = controPartido.findPartidoEntities();
-                for(int i=0;i<4;i++){
+                while(table.getRowCount()!=0)
+                    table.removeRow(0);
+                for(int i=56;i<60;i++){
                     int partido=partidos.get(i).getNumPartido();
                     String nombreEs=partidos.get(i).getCodEstadio().getCiudad();
                     String nombreCi=partidos.get(i).getCodEstadio().getCiudad();
                     String local = partidos.get(i).getCodEquipoLocal().getNombre();
                     String visitante = partidos.get(i).getCodEquipoVisitante().getNombre();
-                    String todos;
+                    String todos=local+"-"+visitante;
+                    StringTokenizer st = new StringTokenizer(partidos.get(i).getFecha().toString());
+                    st.nextToken();
+                    fecha=st.nextToken();
+                    fecha=st.nextToken()+"/"+fecha;
+                    String hora = st.nextToken();
+                    st.nextToken();
+                    fecha=fecha+"/"+st.nextToken();
+                    table.addRow(new Object[]{partido, fecha, nombreEs,nombreCi,todos,hora});
                     
                 }
                 jTabbedPane1.setSelectedIndex(6);
