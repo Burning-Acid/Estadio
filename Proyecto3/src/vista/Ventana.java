@@ -11,10 +11,14 @@ import controllers.EquipoPaisJpaController;
 import controllers.JugadorJpaController;
 import controllers.PartidoJpaController;
 import entities.EquipoPais;
+import entities.Gol;
 import entities.Jugador;
 import entities.Partido;
 import entities.Posicion;
 import java.awt.Event;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import static java.lang.Short.parseShort;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,7 +27,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -216,6 +223,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel89 = new javax.swing.JLabel();
         jLabel90 = new javax.swing.JLabel();
         jLabel91 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1439,7 +1447,20 @@ public class Ventana extends javax.swing.JFrame {
             new String [] {
                 "Equipo", "Jugador", "Minuto"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(jTable4);
 
         jLabel87.setText("Marcador");
@@ -1448,9 +1469,20 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel89.setText("Equipo Visitante");
 
-        jLabel90.setText("-");
+        jLabel90.setText("0");
 
-        jLabel91.setText("-");
+        jLabel91.setText("0");
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 138, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 142, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1478,13 +1510,15 @@ public class Ventana extends javax.swing.JFrame {
                                     .addComponent(jLabel4)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(53, 53, 53)
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(157, 157, 157)
                         .addComponent(jButton2)
-                        .addGap(129, 129, 129)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(209, Short.MAX_VALUE))
+                        .addGap(106, 106, 106)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1509,9 +1543,14 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel91))
                 .addGap(28, 28, 28)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1729,8 +1768,8 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         agregarGol();
-        actual = 3;
-        jTabbedPane1.setSelectedIndex(3);
+        actual = 12;
+        jTabbedPane1.setSelectedIndex(12);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1757,6 +1796,15 @@ public class Ventana extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         jTabbedPane1.setSelectedIndex(actual);
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        try {
+            mostrarFoto();
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTable4MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1884,6 +1932,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2043,10 +2092,50 @@ public class Ventana extends javax.swing.JFrame {
                 }
             }     
         }
+        
+        jTextField2.setText("  ");
 
     }
 
     private void agregarGol() {
         
+        DefaultTableModel modelo = (DefaultTableModel) jTable4.getModel();
+        modelo.addRow(new Object [] {jComboBox2.getSelectedItem(),jComboBox3.getSelectedItem(),jTextField2.getText()});
+        
+        int golLocal = Integer.parseInt(jLabel90.getText());;
+        int golVisi = Integer.parseInt(jLabel91.getText());;
+        
+        if(jComboBox2.getSelectedIndex() == 1){
+            golLocal++;
+            jLabel90.setText(Integer.toString(golLocal));
+          
+        }else if (jComboBox2.getSelectedIndex() == 2){
+            golVisi++;
+            jLabel91.setText(Integer.toString(golVisi));
+        }
+        
+        EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
+        EquipoPais equipo = null;
+        //short codE = controEquipoPais.findEquipoPais(equipo.getCodEquipo());
+        short numP = parseShort(jTextField1.getText());
+        short minuto = parseShort(jTextField2.getText().trim());
+        short numJ = parseShort(jTextField3.getText());
+        short u=1;
+        short i=1;
+        
+        Gol gol = new Gol(u,numP,minuto,i);
     }
+
+    private void mostrarFoto() throws IOException {
+       
+        Jugador jug = new Jugador();
+        File file = new File("C:\\Users\\linam\\Desktop\\james.jpg");
+        byte[] foto = new byte[(int) file.length()];
+        FileInputStream fileInputStream = new FileInputStream(file);
+        fileInputStream.read(foto);
+        fileInputStream.close();
+        jug.setFoto(foto);   
+        
+        byte[] recupera = (byte[]) jug.getFoto();
+    }  
 }
