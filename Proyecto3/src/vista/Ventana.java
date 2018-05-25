@@ -2022,6 +2022,8 @@ public class Ventana extends javax.swing.JFrame {
         List<Partido> partidos = controPartido.findPartidoEntities();
         DateFormat dia = new SimpleDateFormat("dd 'de' MMMM 'de' YYYY");
         DateFormat hora = new SimpleDateFormat("HH:mm");
+        int golLocal = Integer.parseInt(jLabel90.getText());
+        int golVisi = Integer.parseInt(jLabel91.getText());
 
         while(modelo.getRowCount() !=0){
             modelo.removeRow(0);
@@ -2052,8 +2054,29 @@ public class Ventana extends javax.swing.JFrame {
                     String equipo = golsito.getJugador().getEquipoPais().getNombre();
                     String jugador = golsito.getJugador().getNombres() + " " + golsito.getJugador().getApellidos();
                     String minuto = String.valueOf(golsito.getGolPK().getMinuto());
-                    
+                    String EquiTablaL = (String) jTable2.getValueAt(4,1);
+                    System.out.println("Local " + EquiTablaL);
+                    String EquiTablaV = (String) jTable2.getValueAt(5,1);
+                    System.out.println("Visitante " + EquiTablaV);
+                    System.out.println("Equipo " + equipo);
+                            
                     modelo2.addRow(new Object [] {equipo,jugador,minuto});
+                    int filas = modelo2.getRowCount();
+                    //System.out.println("Filas " + filas);
+                    
+                    for(int k=1 ; k <= modelo2.getRowCount(); k++ ){
+                        System.out.println("k" + k);
+                    
+                        if(equipo.equalsIgnoreCase(EquiTablaL)){ 
+                            System.out.println("Aqui");
+                            golLocal++;
+                            jLabel90.setText(Integer.toString(golLocal));
+                        }else{
+                            System.out.println("Aqui2 ");
+                            golVisi++;
+                            jLabel91.setText(Integer.toString(golVisi));
+                        }
+                    }
                 }
             }
         }        
@@ -2118,8 +2141,8 @@ public class Ventana extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable4.getModel();
         modelo.addRow(new Object [] {jComboBox2.getSelectedItem(),jComboBox3.getSelectedItem(),jTextField2.getText()});
         
-        int golLocal = Integer.parseInt(jLabel90.getText());;
-        int golVisi = Integer.parseInt(jLabel91.getText());;
+        int golLocal = Integer.parseInt(jLabel90.getText());
+        int golVisi = Integer.parseInt(jLabel91.getText());
         
         if(jComboBox2.getSelectedIndex() == 1){
             golLocal++;
