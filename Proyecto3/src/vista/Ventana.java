@@ -2017,13 +2017,18 @@ public class Ventana extends javax.swing.JFrame {
         //System.out.println("Parte 2 " + parte[1].toString());
         //System.out.println("Parte 3 " + parte[2].toString());
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel modelo2 = (DefaultTableModel) jTable4.getModel();
         PartidoJpaController controPartido = new PartidoJpaController();
         List<Partido> partidos = controPartido.findPartidoEntities();
         DateFormat dia = new SimpleDateFormat("dd 'de' MMMM 'de' YYYY");
         DateFormat hora = new SimpleDateFormat("HH:mm");
-        
+
         while(modelo.getRowCount() !=0){
             modelo.removeRow(0);
+        }
+        
+        while(modelo2.getRowCount() !=0){
+            modelo2.removeRow(0);
         }
         
         for(int i=0; i < partidos.size(); i++){
@@ -2038,7 +2043,18 @@ public class Ventana extends javax.swing.JFrame {
                 modelo.addRow(new Object [] {"Hora" , hora.format(fecha)});
                 modelo.addRow(new Object [] {"Equipo Local" , parte[1]});
                 modelo.addRow(new Object [] {"Equipo Visitante" , parte[2]});
-            
+                
+                List<Gol> goles = partidos.get(i).getGolList();
+                
+                for(int j=0; j < goles.size(); j++){
+                    
+                    Gol golsito= goles.get(j);
+                    String equipo = golsito.getJugador().getEquipoPais().getNombre();
+                    String jugador = golsito.getJugador().getNombres() + " " + golsito.getJugador().getApellidos();
+                    String minuto = String.valueOf(golsito.getGolPK().getMinuto());
+                    
+                    modelo2.addRow(new Object [] {equipo,jugador,minuto});
+                }
             }
         }        
     }
@@ -2114,6 +2130,7 @@ public class Ventana extends javax.swing.JFrame {
             jLabel91.setText(Integer.toString(golVisi));
         }
         
+        /*
         EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
         EquipoPais equipo = null;
         //short codE = controEquipoPais.findEquipoPais(equipo.getCodEquipo());
@@ -2123,7 +2140,8 @@ public class Ventana extends javax.swing.JFrame {
         short u=1;
         short i=1;
         
-        Gol gol = new Gol(u,numP,minuto,i);
+        //Gol gol = new Gol(u,numP,minuto,i);
+        */
     }
 
     private void mostrarFoto() throws IOException {
