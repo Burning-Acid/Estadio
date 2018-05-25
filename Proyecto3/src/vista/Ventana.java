@@ -8,12 +8,14 @@ package vista;
 
 
 import controllers.EquipoPaisJpaController;
+import controllers.GolJpaController;
 import controllers.JugadorJpaController;
 import controllers.PartidoJpaController;
 import entities.EquipoPais;
 import entities.Gol;
 import entities.GolPK;
 import entities.Jugador;
+import entities.JugadorPK;
 import entities.Partido;
 import entities.Posicion;
 import java.awt.Event;
@@ -520,6 +522,12 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
         jButton4.setText("Agregar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -557,8 +565,9 @@ public class Ventana extends javax.swing.JFrame {
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -1762,7 +1771,11 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        agregarGol();
+        try {
+            agregarGol();
+        } catch (Exception ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
         actual = 12;
         jTabbedPane1.setSelectedIndex(12);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -1799,6 +1812,10 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jTable4MouseClicked
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -2132,7 +2149,7 @@ public class Ventana extends javax.swing.JFrame {
 
     }
 
-    private void agregarGol() {
+    private void agregarGol() throws Exception {
         
         DefaultTableModel modelo = (DefaultTableModel) jTable4.getModel();
         modelo.addRow(new Object [] {jComboBox2.getSelectedItem(),jComboBox3.getSelectedItem(),jTextField2.getText()});
@@ -2151,27 +2168,58 @@ public class Ventana extends javax.swing.JFrame {
         
         
         EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
+        GolJpaController controGol = new GolJpaController();
         List<EquipoPais> equipos = controEquipoPais.findEquipoPaisEntities();
+        JugadorJpaController controJugadores = new JugadorJpaController();
+        List<Jugador> jugadores = controJugadores.findJugadorEntities();
         String EquiTablaL = (String) jTable2.getValueAt(4,1);
         String EquiTablaV = (String) jTable2.getValueAt(5,1);
         EquipoPais equipo = null; 
+        String EquipSacar = (String) jComboBox2.getSelectedItem();
+        System.out.println("EquipSacar " + EquipSacar);
+        String jugSel = jComboBox3.getSelectedItem().toString();
+        short numJug = 0;
         
         for(EquipoPais e : equipos)
         {
-            
-            if(e.getNombre().equalsIgnoreCase((String) jTable4.getValueAt(1,1))){
+            if(e.getNombre().equalsIgnoreCase(EquipSacar)){
                 equipo = e;
+            }
+           
+        }
+        
+        for(Jugador jug: jugadores){
+            String nombreJug = jug.getNombres() + " " + jug.getApellidos();
+            
+            if(nombreJug.equalsIgnoreCase(jugSel)){
+            
+                numJug = jug.getJugadorPK().getNumJugador();
             }
         }
         
+        if(equipo == null){
+            System.out.println("Equipo nulo");
+        }
         short codE = equipo.getCodEquipo(); 
+        System.out.println("codE " + codE);
+        System.out.println("AQUI1");
         short numP = parseShort(jTextField1.getText());
-        short minuto = parseShort(jTextField2.getText().trim());
-        //String tipo = null;
-        short numJ = parseShort(jTextField3.getText());
-        
-        Gol golsito = new Gol(codE,numP,minuto,numJ);
+        System.out.println("numP " + numP);
+        System.out.println("AQUI2");
+        String minuto2 = jTextField2.getText().trim();
+        System.out.println("Minuto2" + minuto2);
+        System.out.println("AQUI3");
+        short minuto = parseShort(minuto2);
+        System.out.println("minuto " + minuto);
+        System.out.println("AQUI4");
 
+        Gol golsito = new Gol(codE,numP,minuto,numJug);
+        System.out.println("Entre los dos");
+        golsito.setTipo("cabeza");
+        JugadorPK pksito = new JugadorPK(numJug, codE);
+        golsito.setJugador((new JugadorJpaController()).findJugador(pksito));
+        golsito.setPartido((new PartidoJpaController()).findPartido(numP));
+        controGol.create(golsito);
     }
 
     private void mostrarFoto() throws IOException {

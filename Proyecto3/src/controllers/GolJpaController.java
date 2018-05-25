@@ -47,6 +47,7 @@ public class GolJpaController implements Serializable {
         gol.getGolPK().setCodEquipo(gol.getJugador().getJugadorPK().getCodEquipo());
         gol.getGolPK().setNumPartido(gol.getPartido().getNumPartido());
         gol.getGolPK().setNumJugador(gol.getJugador().getJugadorPK().getNumJugador());
+        System.out.println("aqui");
         EntityManager em = null;
         try {
             em = getEntityManager();
