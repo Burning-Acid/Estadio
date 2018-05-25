@@ -2201,20 +2201,20 @@ public class Ventana extends javax.swing.JFrame {
             System.out.println("Equipo nulo");
         }
         short codE = equipo.getCodEquipo(); 
-        System.out.println("codE " + codE);
-        System.out.println("AQUI1");
+        //System.out.println("codE " + codE);
+        //System.out.println("AQUI1");
         short numP = parseShort(jTextField1.getText());
-        System.out.println("numP " + numP);
-        System.out.println("AQUI2");
+        //System.out.println("numP " + numP);
+        //System.out.println("AQUI2");
         String minuto2 = jTextField2.getText().trim();
-        System.out.println("Minuto2" + minuto2);
-        System.out.println("AQUI3");
+        //System.out.println("Minuto2" + minuto2);
+        //System.out.println("AQUI3");
         short minuto = parseShort(minuto2);
-        System.out.println("minuto " + minuto);
-        System.out.println("AQUI4");
+        //System.out.println("minuto " + minuto);
+        //System.out.println("AQUI4");
 
         Gol golsito = new Gol(codE,numP,minuto,numJug);
-        System.out.println("Entre los dos");
+        //System.out.println("Entre los dos");
         golsito.setTipo("cabeza");
         JugadorPK pksito = new JugadorPK(numJug, codE);
         golsito.setJugador((new JugadorJpaController()).findJugador(pksito));
