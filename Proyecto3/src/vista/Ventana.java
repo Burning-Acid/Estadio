@@ -12,6 +12,7 @@ import controllers.JugadorJpaController;
 import controllers.PartidoJpaController;
 import entities.EquipoPais;
 import entities.Gol;
+import entities.GolPK;
 import entities.Jugador;
 import entities.Partido;
 import entities.Posicion;
@@ -2148,18 +2149,29 @@ public class Ventana extends javax.swing.JFrame {
             jLabel91.setText(Integer.toString(golVisi));
         }
         
-        /*
+        
         EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
-        EquipoPais equipo = null;
-        //short codE = controEquipoPais.findEquipoPais(equipo.getCodEquipo());
+        List<EquipoPais> equipos = controEquipoPais.findEquipoPaisEntities();
+        String EquiTablaL = (String) jTable2.getValueAt(4,1);
+        String EquiTablaV = (String) jTable2.getValueAt(5,1);
+        EquipoPais equipo = null; 
+        
+        for(EquipoPais e : equipos)
+        {
+            
+            if(e.getNombre().equalsIgnoreCase((String) jTable4.getValueAt(1,1))){
+                equipo = e;
+            }
+        }
+        
+        short codE = equipo.getCodEquipo(); 
         short numP = parseShort(jTextField1.getText());
         short minuto = parseShort(jTextField2.getText().trim());
+        //String tipo = null;
         short numJ = parseShort(jTextField3.getText());
-        short u=1;
-        short i=1;
         
-        //Gol gol = new Gol(u,numP,minuto,i);
-        */
+        Gol golsito = new Gol(codE,numP,minuto,numJ);
+
     }
 
     private void mostrarFoto() throws IOException {
