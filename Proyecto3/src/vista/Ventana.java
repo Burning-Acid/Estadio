@@ -2738,7 +2738,7 @@ public class Ventana extends javax.swing.JFrame {
         
         PartidoJpaController controPartido = new PartidoJpaController();
         List<Partido> partidos = controPartido.findPartidoEntities();
-        String numP =  (String) jTable2.getValueAt(0,1);
+        String numP = jTable2.getValueAt(0,1).toString();
         //System.out.println("numP" + numP);
         jLabel95.setText(numP);
         jComboBox2.removeAllItems();
@@ -2798,7 +2798,7 @@ public class Ventana extends javax.swing.JFrame {
         String EquiTablaL = (String) jTable2.getValueAt(4,1);
         String EquiTablaV = (String) jTable2.getValueAt(5,1);
         EquipoPais equipo = null; 
-        String EquipSacar = (String) jTable2.getValueAt(0, 1);
+        String EquipSacar = jTable2.getValueAt(0, 1).toString();
         System.out.println("EquipSacar " + EquipSacar);
         String jugSel = jComboBox3.getSelectedItem().toString();
         short numJug = 0;
