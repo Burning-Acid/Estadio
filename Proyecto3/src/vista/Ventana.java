@@ -8,6 +8,8 @@ package vista;
 
 
 import controllers.EquipoPaisJpaController;
+import controllers.GolJpaController;
+import controllers.JugadorJpaController;
 import controllers.PaisJpaController;
 import controllers.PartidoJpaController;
 import controllers.SillaJpaController;
@@ -15,6 +17,8 @@ import controllers.UsuarioJpaController;
 import entities.*;
 import java.awt.Component;
 import java.awt.Event;
+import java.awt.Image;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.lang.Short.parseShort;
@@ -29,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -37,6 +42,8 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
+import sun.awt.image.ByteArrayImageSource;
+import sun.awt.image.ToolkitImage;
 
 /**
  *
@@ -2517,4 +2524,244 @@ public class Ventana extends javax.swing.JFrame {
         Ventana view = new Ventana();
     }
 
+    private void revisar() {
+        
+        if(jComboBox1.getSelectedIndex() > 0 ){
+            jButton1.setEnabled(true);
+        }else{
+            jButton1.setEnabled(false);
+        }
+    }
+
+    private void detallesPartido() {
+        
+        String sel = (String) jComboBox1.getSelectedItem();
+        String parte[] = sel.split("[.-]");
+        //System.out.println("Parte 1 " + parte[0].toString());
+        //System.out.println("Parte 2 " + parte[1].toString());
+        //System.out.println("Parte 3 " + parte[2].toString());
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel modelo2 = (DefaultTableModel) jTable4.getModel();
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        DateFormat dia = new SimpleDateFormat("dd 'de' MMMM 'de' YYYY");
+        DateFormat hora = new SimpleDateFormat("HH:mm");
+        
+        while(modelo.getRowCount() !=0){
+            modelo.removeRow(0);
+        }
+        
+        while(modelo2.getRowCount() !=0){
+            modelo2.removeRow(0);
+        }
+        
+        for(int i=0; i < partidos.size(); i++){
+        
+            if(String.valueOf(partidos.get(i).getNumPartido()).equals(parte[0])){
+                
+                Date fecha = partidos.get(i).getFecha();
+
+                modelo.addRow(new Object [] {"Número partido",parte[0]});
+                modelo.addRow(new Object [] {"Estadio", partidos.get(i).getCodEstadio().getNombre()});
+                modelo.addRow(new Object [] {"Fecha" , dia.format(fecha)});
+                modelo.addRow(new Object [] {"Hora" , hora.format(fecha)});
+                modelo.addRow(new Object [] {"Equipo Local" , parte[1]});
+                modelo.addRow(new Object [] {"Equipo Visitante" , parte[2]});
+                
+                List<Gol> goles = partidos.get(i).getGolList();
+                
+                for(int j=0; j < goles.size(); j++){
+                    
+                    Gol golsito= goles.get(j);
+                    String equipo = golsito.getJugador().getEquipoPais().getNombre();
+                    String jugador = golsito.getJugador().getNombres() + " " + golsito.getJugador().getApellidos();
+                    String minuto = String.valueOf(golsito.getGolPK().getMinuto());
+                    String EquiTablaL = (String) jTable2.getValueAt(4,1);
+                    System.out.println("Local " + EquiTablaL);
+                    String EquiTablaV = (String) jTable2.getValueAt(5,1);
+                    System.out.println("Visitante " + EquiTablaV);
+                    System.out.println("Equipo " + equipo);
+                            
+                    modelo2.addRow(new Object [] {equipo,jugador,minuto});
+                    int filas = modelo2.getRowCount();
+                    //System.out.println("Filas " + filas);
+                }
+            }
+        }
+        
+        Integer golLocal = 0;
+        Integer golVisit = 0;
+        
+        Partido p = controPartido.findPartido(parseShort(parte[0]));
+        List<Gol> goles = p.getGolList();
+        int codE = p.getCodEquipoLocal().getCodEquipo();
+        for(Gol gl: goles){
+
+            if(gl.getGolPK().getCodEquipo() == codE){
+                golLocal++;
+            }
+            else
+                golVisit++;
+        }
+        //jLabel90.setText(golLocal.toString());
+        //jLabel91.setText(golVisit.toString());        
+    }
+
+    private void llenarCampos() {
+        
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        String numP =  (String) jTable2.getValueAt(0,1);
+        //System.out.println("numP" + numP);
+        jTextField1.setText(numP);
+        jComboBox2.removeAllItems();
+        jComboBox2.addItem("Seleccionar");
+        
+        Partido part = controPartido.findPartido(parseShort(numP));
+
+        String ELocal = part.getCodEquipoLocal().getNombre();
+        String EVisitante = part.getCodEquipoVisitante().getNombre();;
+            
+        jComboBox2.addItem(ELocal);
+        jComboBox2.addItem(EVisitante);   
+ 
+    }
+
+    private void jugadoresEquipo() {
+        
+        int equipSel = jComboBox2.getSelectedIndex();
+        short numP = parseShort(jTextField1.getText());
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        
+        Partido par = controPartido.findPartido(numP);
+        List<Posicion> posi = par.getPosicionList();
+        EquipoPais equipo;
+        
+        jComboBox3.removeAllItems();
+        jComboBox3.addItem("Seleccionar");
+        
+        if(equipSel == 1){
+            equipo = par.getCodEquipoLocal();
+        }else{
+            equipo = par.getCodEquipoVisitante();
+        }
+        
+        if(jComboBox2.getSelectedIndex() > 0){
+            
+            for(int i =0; i < posi.size(); i++){
+                
+                if(equipo.getCodEquipo() == posi.get(i).getJugador().getEquipoPais().getCodEquipo()){
+                       jComboBox3.addItem(posi.get(i).getJugador().getNombres() + " " + posi.get(i).getJugador().getApellidos());
+                }
+            }     
+        }
+        
+        jTextField2.setText("  ");
+
+    }
+
+    private void agregarGol() {
+                
+        PartidoJpaController controPartido = new PartidoJpaController();
+        EntityManager em = controPartido.getEntityManager();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
+        GolJpaController controGol = new GolJpaController();
+        List<EquipoPais> equipos = controEquipoPais.findEquipoPaisEntities();
+        JugadorJpaController controJugadores = new JugadorJpaController();
+        List<Jugador> jugadores = controJugadores.findJugadorEntities();
+        String EquiTablaL = (String) jTable2.getValueAt(4,1);
+        String EquiTablaV = (String) jTable2.getValueAt(5,1);
+        EquipoPais equipo = null; 
+        String EquipSacar = (String) jTable2.getValueAt(0, 1);
+        System.out.println("EquipSacar " + EquipSacar);
+        String jugSel = jComboBox3.getSelectedItem().toString();
+        short numJug = 0;
+        short numP = parseShort(jTextField1.getText());
+        Partido par = controPartido.findPartido((short)numP);
+        if(jComboBox2.getSelectedIndex() == 1)
+        {
+            equipo = par.getCodEquipoLocal();
+        }
+        else if(jComboBox2.getSelectedIndex() == 2)
+        {
+            equipo = par.getCodEquipoVisitante();
+        }
+        
+        for(Jugador jug: jugadores){
+            String nombreJug = jug.getNombres() + " " + jug.getApellidos();
+            
+            if(nombreJug.equalsIgnoreCase(jugSel)){
+            
+                numJug = jug.getJugadorPK().getNumJugador();
+            }
+        }
+        
+        if(equipo == null){
+            System.out.println("Equipo nulo");
+        }
+        short codE = equipo.getCodEquipo(); 
+        //System.out.println("codE " + codE);
+        //System.out.println("AQUI1");
+        //System.out.println("numP " + numP);
+        //System.out.println("AQUI2");
+        String minuto2 = jTextField2.getText().trim();
+        //System.out.println("Minuto2" + minuto2);
+        //System.out.println("AQUI3");
+        short minuto = parseShort(minuto2);
+        //System.out.println("minuto " + minuto);
+        //System.out.println("AQUI4");
+        em.getTransaction().begin();
+        try{
+            Gol golsito = new Gol(codE,numP,minuto,numJug);
+            //System.out.println("Entre los dos");
+            golsito.setTipo("cabeza");
+            JugadorPK pksito = new JugadorPK(numJug, codE);
+            golsito.setJugador((new JugadorJpaController()).findJugador(pksito));
+            golsito.setPartido((new PartidoJpaController()).findPartido(numP));
+            controGol.create(golsito);
+            em.getTransaction().commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            em.getTransaction().rollback();
+        }
+    }
+
+    private void mostrarFoto() throws IOException {
+       
+        System.out.println("Click");
+        JugadorJpaController controJugador = new JugadorJpaController();
+        int col = jTable4.getSelectedColumn();
+        int fil = jTable4.getSelectedRow();
+       
+        List<Jugador> jugadores = controJugador.findJugadorEntities();
+        if(col==1)
+        {
+            String nombreJ = (String) this.jTable4.getValueAt(fil, col);
+            for(Jugador j:jugadores)
+            {
+                String nom = j.getNombres() + " " + j.getApellidos();
+                if(nombreJ.equalsIgnoreCase(nom))
+                {
+                    if(j.getFoto() != null)
+                    {  
+                    //Image ima = new ToolkitImage(new ByteArrayImageSource(j.getFoto()));
+                    //ImageIcon ic = new ImageIcon (ima);
+                    //jLabel92.setIcon(ic);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "No hay foto");
+                    }
+                }
+            }     
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado jugador");
+        }
+    }  
 }
