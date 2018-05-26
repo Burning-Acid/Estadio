@@ -1777,6 +1777,7 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
         actual = 12;
+        detallesPartido();
         jTabbedPane1.setSelectedIndex(12);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -2034,9 +2035,7 @@ public class Ventana extends javax.swing.JFrame {
         List<Partido> partidos = controPartido.findPartidoEntities();
         DateFormat dia = new SimpleDateFormat("dd 'de' MMMM 'de' YYYY");
         DateFormat hora = new SimpleDateFormat("HH:mm");
-        int golLocal = Integer.parseInt(jLabel90.getText());
-        int golVisi = Integer.parseInt(jLabel91.getText());
-
+        
         while(modelo.getRowCount() !=0){
             modelo.removeRow(0);
         }
@@ -2075,24 +2074,26 @@ public class Ventana extends javax.swing.JFrame {
                     modelo2.addRow(new Object [] {equipo,jugador,minuto});
                     int filas = modelo2.getRowCount();
                     //System.out.println("Filas " + filas);
-                    
-                    /*
-                    for(int k=1 ; k <= modelo2.getRowCount(); k++ ){
-                        System.out.println("k" + k);
-                    
-                        if(equipo.equalsIgnoreCase(EquiTablaL)){ 
-                            System.out.println("Aqui");
-                            golLocal++;
-                            jLabel90.setText(Integer.toString(golLocal));
-                        }else{
-                            System.out.println("Aqui2 ");
-                            golVisi++;
-                            jLabel91.setText(Integer.toString(golVisi));
-                        }
-                    }*/
                 }
             }
-        }        
+        }
+        
+        Integer golLocal = 0;
+        Integer golVisit = 0;
+        
+        Partido p = controPartido.findPartido(parseShort(parte[0]));
+        List<Gol> goles = p.getGolList();
+        int codE = p.getCodEquipoLocal().getCodEquipo();
+        for(Gol gl: goles){
+
+            if(gl.getGolPK().getCodEquipo() == codE){
+                golLocal++;
+            }
+            else
+                golVisit++;
+        }
+        jLabel90.setText(golLocal.toString());
+        jLabel91.setText(golVisit.toString());        
     }
 
     private void llenarCampos() {
@@ -2150,23 +2151,9 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     private void agregarGol() throws Exception {
-        
-        DefaultTableModel modelo = (DefaultTableModel) jTable4.getModel();
-        modelo.addRow(new Object [] {jComboBox2.getSelectedItem(),jComboBox3.getSelectedItem(),jTextField2.getText()});
-        
-        int golLocal = Integer.parseInt(jLabel90.getText());
-        int golVisi = Integer.parseInt(jLabel91.getText());
-        
-        if(jComboBox2.getSelectedIndex() == 1){
-            golLocal++;
-            jLabel90.setText(Integer.toString(golLocal));
-          
-        }else if (jComboBox2.getSelectedIndex() == 2){
-            golVisi++;
-            jLabel91.setText(Integer.toString(golVisi));
-        }
-        
-        
+                
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
         EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
         GolJpaController controGol = new GolJpaController();
         List<EquipoPais> equipos = controEquipoPais.findEquipoPaisEntities();
@@ -2175,17 +2162,19 @@ public class Ventana extends javax.swing.JFrame {
         String EquiTablaL = (String) jTable2.getValueAt(4,1);
         String EquiTablaV = (String) jTable2.getValueAt(5,1);
         EquipoPais equipo = null; 
-        String EquipSacar = (String) jComboBox2.getSelectedItem();
+        String EquipSacar = (String) jTable2.getValueAt(0, 1);
         System.out.println("EquipSacar " + EquipSacar);
         String jugSel = jComboBox3.getSelectedItem().toString();
         short numJug = 0;
-        
-        for(EquipoPais e : equipos)
+        short numP = parseShort(jTextField1.getText());
+        Partido par = controPartido.findPartido((short)numP);
+        if(jComboBox2.getSelectedIndex() == 1)
         {
-            if(e.getNombre().equalsIgnoreCase(EquipSacar)){
-                equipo = e;
-            }
-           
+            equipo = par.getCodEquipoLocal();
+        }
+        else if(jComboBox2.getSelectedIndex() == 2)
+        {
+            equipo = par.getCodEquipoVisitante();
         }
         
         for(Jugador jug: jugadores){
@@ -2203,7 +2192,6 @@ public class Ventana extends javax.swing.JFrame {
         short codE = equipo.getCodEquipo(); 
         //System.out.println("codE " + codE);
         //System.out.println("AQUI1");
-        short numP = parseShort(jTextField1.getText());
         //System.out.println("numP " + numP);
         //System.out.println("AQUI2");
         String minuto2 = jTextField2.getText().trim();
