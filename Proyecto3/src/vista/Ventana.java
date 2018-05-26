@@ -8,19 +8,18 @@ package vista;
 
 
 import controllers.EquipoPaisJpaController;
-import controllers.GrupoJpaController;
 import controllers.PartidoJpaController;
+import controllers.exceptions.NonexistentEntityException;
 import entities.EquipoPais;
 import entities.Gol;
 import entities.Partido;
-import java.awt.Event;
-import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
@@ -1555,11 +1554,17 @@ public class Ventana extends javax.swing.JFrame {
                     fecha=st.nextToken()+"/"+fecha;
                     String hora = st.nextToken();
                     st.nextToken();
+                    
                     fecha=fecha+"/"+st.nextToken();
                     table.addRow(new Object[]{partido, fecha, nombreEs,nombreCi,todos,hora});
-                    
+                }
+                try {
+                    hacerActualizacionesCuartos();
+                } catch (Exception ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jTabbedPane1.setSelectedIndex(6);
+                
                 
             }
             else{
@@ -1598,8 +1603,54 @@ public class Ventana extends javax.swing.JFrame {
             if(!bandera){
                 JOptionPane.showMessageDialog(jPanel2, "Partidos de octavos de final no se han generado");
             }
-    }                                        
-    private void hacerActualizaciones(){
+    }         
+    private void hacerActualizacionesCuartos() throws NonexistentEntityException, Exception{
+        PartidoJpaController controPartido = new PartidoJpaController();
+        EquipoPaisJpaController equipocontro = new EquipoPaisJpaController();
+        List<EquipoPais> equipos =equipocontro.findEquipoPaisEntities();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        EquipoPais equipoL;
+        EquipoPais equipoGanadorLocal;
+        EquipoPais equipoL1;
+        EquipoPais equipoV;
+        EquipoPais equipoV1;
+        EquipoPais equipoGanadorVisitante;
+        DefaultTableModel table = (DefaultTableModel) jTable6.getModel();
+        int j=57;
+        for(int i=0;i<table.getRowCount();i++){
+            String todos=(String)table.getValueAt(i, 4);
+            int local = Integer.parseInt(todos.substring(1,3));
+            int visitante=Integer.parseInt(todos.substring(5, 7));
+            equipoL=partidos.get(local).getCodEquipoLocal();
+            equipoV=partidos.get(local).getCodEquipoVisitante();
+            equipoL1=partidos.get(visitante).getCodEquipoLocal();
+            equipoV1 = partidos.get(visitante).getCodEquipoVisitante();
+            equipoGanadorLocal=null;
+            equipoGanadorVisitante=null;
+            if(verificarGanado(partidos.get(local), equipoL.getCodEquipo())){
+                equipoGanadorLocal=equipoL;
+            }
+            else{
+                equipoGanadorLocal=equipoV;
+            }
+            if(verificarGanado(partidos.get(local), equipoL1.getCodEquipo())){
+                equipoGanadorVisitante=equipoL1;
+            }
+            else{
+                equipoGanadorVisitante=equipoV1;
+            }
+            
+            todos=equipoGanadorLocal.getNombre()+"-"+equipoGanadorVisitante.getNombre();
+            table.setValueAt(todos, i, 4);
+            partidos.get(j).setCodEquipoLocal(equipoGanadorLocal);
+            partidos.get(j).setCodEquipoVisitante(equipoGanadorVisitante);
+            controPartido.edit(partidos.get(j));
+            j++;
+            
+        }
+        
+    }
+    private void hacerActualizaciones() throws NonexistentEntityException, Exception{
         PartidoJpaController controPartido = new PartidoJpaController();
         EquipoPaisJpaController equipoContro =  new EquipoPaisJpaController();
         List<EquipoPais> equipos = equipoContro.findEquipoPaisEntities();
@@ -1616,7 +1667,6 @@ public class Ventana extends javax.swing.JFrame {
             letra=str.nextToken();
             int numero=(int) table.getValueAt(j, 1);
             String posicion=Integer.toString(numero)+letra;
-            posicion.trim();
             for(int i=0;i<table1.getRowCount();i++){    
                 String equiposPartido=(String)table1.getValueAt(i, 4);
                 StringTokenizer st = new StringTokenizer(equiposPartido,"-");
@@ -1628,9 +1678,8 @@ public class Ventana extends javax.swing.JFrame {
                     for(EquipoPais e:equipos){
                         
                         if(val.contains(e.getNombre())){
+                            System.out.println(e.getNombre());
                             equipoL=e;
-                            
-                            
                         }
                     }
                 }
@@ -1638,29 +1687,34 @@ public class Ventana extends javax.swing.JFrame {
                 if(posicion.equalsIgnoreCase(visitante)){
                     for(EquipoPais e:equipos){
                         if(e.getNombre().equalsIgnoreCase((String)table.getValueAt(j, 2))){
-                            
+                            System.out.println(e.getNombre());
                             equipoV=e;
                         }
                     }
                 }
                 List<Partido> par=controPartido.findPartidoEntities();
                 for(int k=0;k<table1.getRowCount();k++){
+                    
                     int partido= (int)table1.getValueAt(k, 0);
-                    for (Partido p : par) {
-                        if(p.getNumPartido()>48 && p.getNumPartido()<57){
+                    for (int  z=0; z<par.size();z++) {
+                        Partido p=new Partido();
+                        p=par.get(z);
+                        if(p.getNumPartido()>=48 && p.getNumPartido()<57){
                             if(p.getNumPartido()==partido){                                
                                 if(Objects.nonNull(equipoL)) {
-                                    EntityManager em;
-                                    String actualizar = "update PARTIDO SET COD_EQUIPO_LOCAL="+equipoL.getCodEquipo()+
-                                            " where num_partido="+p.getNumPartido()+";";
-                                    System.out.println(actualizar);
-                                    Query holi=controPartido.getEntityManager().createNativeQuery(actualizar);
-                                    holi.executeUpdate();
+                                    
+                                    
+                                    p.setCodEquipoLocal(equipoL);
+                                       
+                                    controPartido.edit(p);
+                                    break;
                                     
                                 }
                                 if(Objects.nonNull(equipoV)){
-                                    System.out.println("holo");
-                                    String actualizar1 = "UPDATE PARTIDO SET COD_EQUIPO_VISITANTE="+equipoV.getCodEquipo()+"where num_partido="+p.getNumPartido()+";";
+                                    
+                                        p.setCodEquipoVisitante(equipoV);
+                                        controPartido.edit(p);
+                                        break;
                                 }
                             }
                         }
@@ -1884,9 +1938,13 @@ public class Ventana extends javax.swing.JFrame {
                 }
                 
             }
-            hacerActualizaciones()
+            try {
+                hacerActualizaciones();
+            } catch (Exception ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     
-                    ;
+                    
             jTabbedPane1.setSelectedIndex(6);
         }
     }                                         
@@ -1983,7 +2041,7 @@ public class Ventana extends javax.swing.JFrame {
     }                                        
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        DefaultTableModel table = (DefaultTableModel) jTable5.getModel();
+        DefaultTableModel table = (DefaultTableModel) jTable6.getModel();
         while(table.getRowCount()!=0){
                     table.removeRow(0);
         }
