@@ -44,7 +44,7 @@ public class Jugador implements Serializable {
     private String apellidos;
     @Lob
     @Column(name = "FOTO")
-    private Serializable foto;
+    private byte[] foto;
     @JoinTable(name = "CLUBJUGADOR", joinColumns = {
         @JoinColumn(name = "COD_EQUIPO", referencedColumnName = "NUM_JUGADOR")
         , @JoinColumn(name = "NUM_JUGADOR", referencedColumnName = "COD_EQUIPO")}, inverseJoinColumns = {
@@ -96,11 +96,11 @@ public class Jugador implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public Serializable getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(Serializable foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 
