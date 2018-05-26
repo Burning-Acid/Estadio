@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -1605,8 +1606,9 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         actual = 0;
-        jTabbedPane1.setSelectedIndex(0);
         jButton1.setEnabled(false);
+        jComboBox1.setSelectedIndex(0);
+        jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1746,6 +1748,8 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         actual = 0;
+        jButton1.setEnabled(false);
+        jComboBox1.setSelectedIndex(0);
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1782,8 +1786,8 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        actual = 3;
-        jTabbedPane1.setSelectedIndex(3);
+        actual = 12;
+        jTabbedPane1.setSelectedIndex(12);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -2150,9 +2154,10 @@ public class Ventana extends javax.swing.JFrame {
 
     }
 
-    private void agregarGol() throws Exception {
+    private void agregarGol() {
                 
         PartidoJpaController controPartido = new PartidoJpaController();
+        EntityManager em = controPartido.getEntityManager();
         List<Partido> partidos = controPartido.findPartidoEntities();
         EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
         GolJpaController controGol = new GolJpaController();
@@ -2200,14 +2205,22 @@ public class Ventana extends javax.swing.JFrame {
         short minuto = parseShort(minuto2);
         //System.out.println("minuto " + minuto);
         //System.out.println("AQUI4");
-
-        Gol golsito = new Gol(codE,numP,minuto,numJug);
-        //System.out.println("Entre los dos");
-        golsito.setTipo("cabeza");
-        JugadorPK pksito = new JugadorPK(numJug, codE);
-        golsito.setJugador((new JugadorJpaController()).findJugador(pksito));
-        golsito.setPartido((new PartidoJpaController()).findPartido(numP));
-        controGol.create(golsito);
+        em.getTransaction().begin();
+        try{
+            Gol golsito = new Gol(codE,numP,minuto,numJug);
+            //System.out.println("Entre los dos");
+            golsito.setTipo("cabeza");
+            JugadorPK pksito = new JugadorPK(numJug, codE);
+            golsito.setJugador((new JugadorJpaController()).findJugador(pksito));
+            golsito.setPartido((new PartidoJpaController()).findPartido(numP));
+            controGol.create(golsito);
+            em.getTransaction().commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            em.getTransaction().rollback();
+        }
     }
 
     private void mostrarFoto() throws IOException {
