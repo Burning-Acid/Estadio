@@ -8,12 +8,15 @@ package vista;
 
 
 import controllers.EquipoPaisJpaController;
+import controllers.PaisJpaController;
 import controllers.PartidoJpaController;
 import controllers.SillaJpaController;
+import controllers.UsuarioJpaController;
 import entities.*;
 import java.awt.Component;
 import java.awt.Event;
 import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
 import static java.lang.Short.parseShort;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,7 +28,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -2029,12 +2034,13 @@ public class Ventana extends javax.swing.JFrame {
         jLabel56.setText(jTextField5.getText());
         jLabel57.setText(jTextField6.getText());
         jLabel59.setText(jTextField7.getText());
-        
+
         //Identificamos el partido y el estadio mediante el partido
         PartidoJpaController controPartido = new PartidoJpaController();
+        UsuarioJpaController controUsuario = new UsuarioJpaController();
         Partido par = controPartido.findPartido(parseShort(jLabel26.getText()));
         Estadio est = par.getCodEstadio();
-        
+
         //Ahora hallamos la lista de sillas que reservó el usuario
         SillaJpaController controSilla = new SillaJpaController();
         ArrayList<Silla> sillasCompradas = new ArrayList<>();
@@ -2047,7 +2053,6 @@ public class Ventana extends javax.swing.JFrame {
             SillaPK PK = new SillaPK(fila, asiento, par.getNumPartido());
             sillasCompradas.add(controSilla.findSilla(PK));
         }
-        
         //Llenamos los datos del partido para el que compramos las sillas
         DateFormat dia = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         EquipoPais local = par.getCodEquipoLocal();
@@ -2056,7 +2061,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel66.setText(Short.toString(par.getNumPartido()));
         jLabel67.setText(dia.format(par.getFecha()));
         jLabel68.setText(local.getNombre() + " - " + visitante.getNombre());
-        
+
         //Llenamos los datos de las sillas compradas
         String sillas = new String();
         sillas = "" + jTable9.getValueAt(0, 0) + jTable9.getValueAt(0, 1);
@@ -2067,7 +2072,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel75.setText(Integer.toString(sillasCompradas.size()));
         jLabel74.setText("Categoria " + sillasCompradas.get(0).getCategoria());
         jLabel73.setText(sillas);
-        
+
         //Ahora llenamos la información de pago
         jLabel81.setText(jLabel48.getText());
         String opcionPago = new String();
@@ -2086,6 +2091,44 @@ public class Ventana extends javax.swing.JFrame {
         jLabel83.setText(pagado);
         jLabel84.setText(recibo.toString());
         jLabel86.setText(dia.format(new Date()));
+        EntityManager em = controPartido.getEntityManager();
+        em.getTransaction().begin();
+        try{
+            Usuario us =controUsuario.findUsuario(parseLong(jLabel59.getText()));
+            if(null == us)
+            {
+                PaisJpaController controPais = new PaisJpaController();
+                us = new Usuario(parseLong(jLabel59.getText()), jLabel56.getText(), jLabel57.getText(), new Date());
+                us.setCodPais(controPais.findPais((short)45));
+                us.setSillaList(sillasCompradas);
+                controUsuario.create(us);
+            }
+            else if(us.getSillaList().size()==0)
+            {
+                us.setSillaList(sillasCompradas);
+                controUsuario.edit(us);
+            }
+            else
+            {
+                ArrayList<Silla> temporal = new ArrayList<>();
+                temporal.addAll(sillasCompradas);
+                temporal.addAll(us.getSillaList());
+                us.setSillaList(temporal);
+                controUsuario.edit(us);
+            }
+            for(Silla sil: sillasCompradas)
+            {
+                sil.setEstado("COMPRADO");
+                sil.setIdentificacion(us);
+                controSilla.edit(sil);
+            }
+            em.getTransaction().commit();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            em.getTransaction().rollback();
+            jTabbedPane1.setSelectedIndex(4);
+        }
     }
     
     private void comprobarDatos()
@@ -2111,9 +2154,10 @@ public class Ventana extends javax.swing.JFrame {
             jButton18.setEnabled(true);
             for(int i=0 ; i<texto.length() ; ++i)
             {
-                if(texto.charAt(i)<0 || texto.charAt(i)>9)
+                if(texto.charAt(i)<'0' || texto.charAt(i)>'9')
                 {
                     jButton18.setEnabled(false);
+                    return;
                 }
             }
             if(texto.length()==0)
@@ -2142,9 +2186,10 @@ public class Ventana extends javax.swing.JFrame {
             jButton18.setEnabled(true);
             for(int i=0 ; i<texto.length() ; ++i)
             {
-                if(texto.charAt(i)<0 || texto.charAt(i)>9)
+                if(texto.charAt(i)<'0' || texto.charAt(i)>'9')
                 {
                     jButton18.setEnabled(false);
+                    return;
                 }
             }
             if(jTextField4.getText().length() >= 5)
