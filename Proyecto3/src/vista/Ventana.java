@@ -14,6 +14,7 @@ import controllers.PaisJpaController;
 import controllers.PartidoJpaController;
 import controllers.SillaJpaController;
 import controllers.UsuarioJpaController;
+import controllers.exceptions.NonexistentEntityException;
 import entities.*;
 import java.awt.Component;
 import java.awt.Event;
@@ -32,6 +33,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.StringTokenizer;
 import javax.persistence.EntityManager;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -240,6 +243,12 @@ public class Ventana extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+
         jLabel1.setText("Seleccionar Partido");
 
         jLabel2.setText("Partidos");
@@ -307,7 +316,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel11.setText("Fase");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cuartos de Final", "Octavos de Final" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Octavos de Final", "Cuartos de Final"}));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -341,9 +350,8 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(jButton9)
                         .addGap(56, 56, 56)
                         .addComponent(jButton25))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel10)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(358, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -720,8 +728,13 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jLabel5)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -732,20 +745,20 @@ public class Ventana extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addGap(91, 91, 91)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(91, 91, 91))
-                            .addComponent(jLabel8))
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8))
+                                .addGap(84, 84, 84)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                                .addComponent(jButton5)
-                                .addGap(0, 28, Short.MAX_VALUE))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(459, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addGap(0, 54, Short.MAX_VALUE)
+                                .addComponent(jLabel95, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(413, 413, 413))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -781,15 +794,24 @@ public class Ventana extends javax.swing.JFrame {
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Partido", "Fecha", "Estadio", "Ciudad", "Equipos", "Horario"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable6.getTableHeader().setReorderingAllowed(false);
         jScrollPane12.setViewportView(jTable6);
 
         jButton23.setText("Regresar");
@@ -807,16 +829,16 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel20))))
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(243, 243, 243)
-                        .addComponent(jButton23)))
-                .addContainerGap(196, Short.MAX_VALUE))
+                        .addComponent(jButton23))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -825,9 +847,9 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(50, 50, 50)
                 .addComponent(jButton23)
                 .addContainerGap(668, Short.MAX_VALUE))
         );
@@ -982,6 +1004,11 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
         jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField7KeyReleased(evt);
@@ -1325,15 +1352,28 @@ public class Ventana extends javax.swing.JFrame {
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Grupo", "Posicion", "Equipo", "PG", "PE", "PP", "Puntos"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable5.getTableHeader().setReorderingAllowed(false);
         jScrollPane10.setViewportView(jTable5);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -1573,6 +1613,11 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jTextField3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextField3MousePressed(evt);
+            }
+        });
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -1587,6 +1632,11 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jTextField4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTextField4MousePressed(evt);
+            }
+        });
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -1747,25 +1797,19 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        jButton9.setEnabled(false);
         actual = 1;
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
+        escogerFase();
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-
-            if((String)jComboBox4.getSelectedItem()=="Cuartos de Final"){
-                jLabel20.setText("Cuartos de Final");
-            }
-            else{
-                jLabel20.setText("Octavos de Final");
-            }
-            actual = 12;
-            jTabbedPane1.setSelectedIndex(12);
-        
+        crearTablaEquipos();
+        actual = 10;
+        jTabbedPane1.setSelectedIndex(10);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
@@ -1788,11 +1832,13 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        generarOctavos();
         actual = 6;
         jTabbedPane1.setSelectedIndex(6);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        jButton13.setEnabled(false);
         actual = 2;
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jButton15ActionPerformed
@@ -1854,8 +1900,8 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        actual = 12;
-        jTabbedPane1.setSelectedIndex(12);
+        actual = 10;
+        jTabbedPane1.setSelectedIndex(10);
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1899,8 +1945,9 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        actual = 12;
-        jTabbedPane1.setSelectedIndex(12);
+        eliminarOctavos();
+        actual = 6;
+        jTabbedPane1.setSelectedIndex(6);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -1955,6 +2002,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         actual = 2;
+        jButton13.setEnabled(false);
         jTabbedPane1.setSelectedIndex(2);
     }//GEN-LAST:event_jButton22ActionPerformed
 
@@ -1997,6 +2045,22 @@ public class Ventana extends javax.swing.JFrame {
     private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
         comprobarGol();
     }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        jTabbedPane1.setSelectedIndex(actual);
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jTextField3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField3MousePressed
+        efectivoInsertado();
+    }//GEN-LAST:event_jTextField3MousePressed
+
+    private void jTextField4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField4MousePressed
+        tarjetaInsertada();
+    }//GEN-LAST:event_jTextField4MousePressed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2273,10 +2337,19 @@ public class Ventana extends javax.swing.JFrame {
     
     private void comprobarDatos()
     {
-        String nombre = jTextField5.getText();
-        String apellido = jTextField6.getText();
-        String pasaporte = jTextField7.getText();
-        if(nombre.length() >=3 && apellido.length() >=3 && pasaporte.length() >=3)
+        String nombre = jTextField5.getText().trim();
+        String apellido = jTextField6.getText().trim();
+        String pasaporte = jTextField7.getText().trim();
+        boolean cantDif = true;
+        for(int i=0 ; i<pasaporte.length() ; ++i)
+        {
+            if(pasaporte.charAt(i)<'0' || pasaporte.charAt(i)>'9')
+            {
+                cantDif=false;
+                break;
+            }
+        }
+        if(nombre.length() >=3 && apellido.length() >=3 && pasaporte.length() >=3 && cantDif)
         {
             jButton20.setEnabled(true);
         }
@@ -2287,59 +2360,57 @@ public class Ventana extends javax.swing.JFrame {
     }
     
     private void efectivoInsertado()
-    {        
-        if(jRadioButton1.isSelected())
+    {
+        jRadioButton1.setSelected(true);
+        jRadioButton2.setSelected(false);
+        String texto = jTextField3.getText();
+        jButton18.setEnabled(true);
+        for(int i=0 ; i<texto.length() ; ++i)
         {
-            String texto = jTextField3.getText();
-            jButton18.setEnabled(true);
-            for(int i=0 ; i<texto.length() ; ++i)
-            {
-                if(texto.charAt(i)<'0' || texto.charAt(i)>'9')
-                {
-                    jButton18.setEnabled(false);
-                    return;
-                }
-            }
-            if(texto.length()==0)
+            if(texto.charAt(i)<'0' || texto.charAt(i)>'9')
             {
                 jButton18.setEnabled(false);
                 return;
             }
-            String precio = jLabel48.getText();
-            precio = precio.substring(1);
-            if(parseInt(jTextField3.getText())>=parseInt(precio))
-            {
-                jButton18.setEnabled(true);
-            }
-            else
-            {
-                jButton18.setEnabled(false);
-            }
+        }
+        if(texto.length()==0)
+        {
+            jButton18.setEnabled(false);
+            return;
+        }
+        String precio = jLabel48.getText();
+        precio = precio.substring(1);
+        if(parseInt(jTextField3.getText())>=parseInt(precio))
+        {
+            jButton18.setEnabled(true);
+        }
+        else
+        {
+            jButton18.setEnabled(false);
         }
     }
     
     private void tarjetaInsertada()
     {
-        if(jRadioButton2.isSelected())
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(true);
+        String texto = jTextField4.getText();
+        jButton18.setEnabled(true);
+        for(int i=0 ; i<texto.length() ; ++i)
         {
-            String texto = jTextField4.getText();
-            jButton18.setEnabled(true);
-            for(int i=0 ; i<texto.length() ; ++i)
-            {
-                if(texto.charAt(i)<'0' || texto.charAt(i)>'9')
-                {
-                    jButton18.setEnabled(false);
-                    return;
-                }
-            }
-            if(jTextField4.getText().length() >= 5)
-            {
-                jButton18.setEnabled(true);
-            }
-            else
+            if(texto.charAt(i)<'0' || texto.charAt(i)>'9')
             {
                 jButton18.setEnabled(false);
+                return;
             }
+        }
+        if(jTextField4.getText().length() >= 5)
+        {
+            jButton18.setEnabled(true);
+        }
+        else
+        {
+            jButton18.setEnabled(false);
         }
     }
     
@@ -2490,6 +2561,11 @@ public class Ventana extends javax.swing.JFrame {
             total+=sil.getPrecio()*2850;   //Esta es la tasa de conversión de USD a pesos
         }
         jLabel48.setText("$"+total);
+        jRadioButton1.setSelected(false);
+        jRadioButton2.setSelected(false);
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jButton18.setEnabled(false);
     }
     
     private void updateSeleccion(int _categoria, int _partido)
@@ -2582,6 +2658,7 @@ public class Ventana extends javax.swing.JFrame {
             Integer cant = lista.get(i);
             modelo.addRow(new Object[]{i+1, precios.get(i), cant});
         }
+        jButton14.setEnabled(false);
     }
     
     private void updateTablaBoleteria()
@@ -2910,5 +2987,313 @@ public class Ventana extends javax.swing.JFrame {
         jTextField5.setText("");
         jTextField6.setText("");
         jTextField7.setText("");
+        jButton20.setEnabled(false);
     }
+    
+    private void hacerActualizaciones() throws NonexistentEntityException, Exception{
+        PartidoJpaController controPartido = new PartidoJpaController();
+        EquipoPaisJpaController equipoContro =  new EquipoPaisJpaController();
+        List<EquipoPais> equipos = equipoContro.findEquipoPaisEntities();
+        EquipoPais equipoL;
+        EquipoPais equipoV;
+        DefaultTableModel table = (DefaultTableModel) jTable5.getModel();
+        DefaultTableModel table1 = (DefaultTableModel) jTable6.getModel();
+        
+        for(int j=0;j<table.getRowCount();j++){
+            String grupo =(String)table.getValueAt(j, 0);
+            String letra;
+            StringTokenizer str = new StringTokenizer(grupo);
+            str.nextToken();
+            letra=str.nextToken();
+            int numero=(int) table.getValueAt(j, 1);
+            String posicion=Integer.toString(numero)+letra;
+            for(int i=0;i<table1.getRowCount();i++){    
+                String equiposPartido=(String)table1.getValueAt(i, 4);
+                StringTokenizer st = new StringTokenizer(equiposPartido,"-");
+                String local = st.nextToken().trim();
+                String visitante = st.nextToken().trim();
+                equipoL=null;
+                if(posicion.toUpperCase().equals(local.toUpperCase())  ){
+                    String val = (String)table.getValueAt(j, 2);
+                    for(EquipoPais e:equipos){
+                        
+                        if(val.contains(e.getNombre())){
+                            System.out.println(e.getNombre());
+                            equipoL=e;
+                        }
+                    }
+                }
+                equipoV=null;
+                if(posicion.equalsIgnoreCase(visitante)){
+                    for(EquipoPais e:equipos){
+                        if(e.getNombre().equalsIgnoreCase((String)table.getValueAt(j, 2))){
+                            System.out.println(e.getNombre());
+                            equipoV=e;
+                        }
+                    }
+                }
+                List<Partido> par=controPartido.findPartidoEntities();
+                for(int k=0;k<table1.getRowCount();k++){
+                    
+                    int partido= (int)table1.getValueAt(k, 0);
+                    for (int  z=0; z<par.size();z++) {
+                        Partido p=new Partido();
+                        p=par.get(z);
+                        if(p.getNumPartido()>=48 && p.getNumPartido()<57){
+                            if(p.getNumPartido()==partido){                                
+                                if(Objects.nonNull(equipoL)) {
+                                    
+                                    
+                                    p.setCodEquipoLocal(equipoL);
+                                       
+                                    controPartido.edit(p);
+                                    break;
+                                    
+                                }
+                                if(Objects.nonNull(equipoV)){
+                                    
+                                        p.setCodEquipoVisitante(equipoV);
+                                        controPartido.edit(p);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+    }
+    private void numerarTabla(){
+        DefaultTableModel table = (DefaultTableModel) jTable5.getModel();
+        for(int i=0;i<table.getRowCount();i++){
+            table.setValueAt((i%4)+1, i, 1);
+        }
+    }    
+    private static int calcularPartidosGanados(EquipoPais   e){
+        int partidosG=0;
+        List<Partido> partidos = e.getPartidoList();
+        for(Partido par: partidos){
+            if(par.getNumPartido()<=48){
+                if(1 == verificarGanado(par, e.getCodEquipo())){
+                    partidosG++;
+                }
+            }
+        }
+        return partidosG;
+    }
+    private static Integer verificarGanado(Partido par,int codigo){
+        int golesEq=0;
+        int golesP=0;
+        List<Gol> goles = par.getGolList();
+        for(Gol go: goles){
+            if(go.getGolPK().getCodEquipo()==codigo){
+                golesEq++;
+            }
+            else{
+                golesP++;
+            }
+        }
+        if(golesEq>golesP)
+            return 1;
+        if(golesEq==golesP)
+            return 0;
+        else
+            return -1;
+    }
+    private static int calcularPartidosPerdidos(EquipoPais e){
+        int partidosP=0;
+        List<Partido> partidos = e.getPartidoList();
+        for(Partido par: partidos){
+            if(par.getNumPartido()<=48){
+                if(-1 == verificarGanado(par, e.getCodEquipo())){
+                    partidosP++;
+                }
+            }
+        }
+        return partidosP;
+    }
+        private static int calcularPartidosEmpatados(EquipoPais e){
+        int partidosE=0;
+        List<Partido> partidos = e.getPartidoList();
+        for(Partido par: partidos){
+            if(par.getNumPartido()<=48){
+                if(0 == verificarGanado(par, e.getCodEquipo())){
+                    partidosE++;
+                }
+            }
+        }
+        return partidosE;
+    }
+
+    private void escogerFase() {
+            if(jComboBox4.getSelectedIndex()==2){
+                jLabel20.setText("Cuartos de Final");
+                jButton9.setEnabled(true);
+            }
+            else if(jComboBox4.getSelectedIndex()==1){
+                jLabel20.setText("Octavos de Final");
+                jButton9.setEnabled(true);
+            }
+            else
+                jButton9.setEnabled(false);
+    }
+
+    private void crearTablaEquipos() {
+        EquipoPaisJpaController controEquipo = new EquipoPaisJpaController();
+        List<EquipoPais> equipos = controEquipo.findEquipoPaisEntities();
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable5.getModel();
+        while(modelo.getRowCount()!=0)
+            modelo.removeRow(0);
+        
+        int ganados;
+        int empatados;
+        int perdidos;
+        int puntos;
+        
+        for(EquipoPais eq: equipos)
+        {
+            if(eq.getCodEquipo()>32)
+                continue;
+            ganados = calcularPartidosGanados(eq);
+            empatados = calcularPartidosEmpatados(eq);
+            perdidos = calcularPartidosPerdidos(eq);
+            puntos = (ganados*3) + (empatados*1);
+            modelo.addRow(new Object[]{eq.getCodGrupo().getNomGrupo(), (Integer)0, eq.getNombre(), (Integer)ganados, (Integer)empatados, (Integer)perdidos, (Integer)puntos});       
+        }
+        ordenarTablaPartidos();
+        for(int i=0 ; i<modelo.getRowCount() ; ++i)
+        {
+            modelo.setValueAt((i%4)+1, i, 1);
+        }
+    }
+
+    private void ordenarTablaPartidos() {
+        DefaultTableModel modelo = (DefaultTableModel)jTable5.getModel();
+        int maxIndex = 0;
+        for(int i=0 ; i<modelo.getRowCount() ; ++i)
+        {
+            maxIndex = i;
+            for(int j=i+1 ; j<modelo.getRowCount() ; ++j)
+            {
+                String grupoj = modelo.getValueAt(j, 0).toString();
+                String grupoMax = modelo.getValueAt(maxIndex, 0).toString();
+                int puntosJ = (Integer) modelo.getValueAt(j, 6);
+                int puntosMax = (Integer) modelo.getValueAt(maxIndex, 6);
+                if(grupoj.charAt(6) < grupoMax.charAt(6))
+                {
+                    maxIndex = j;
+                }
+                else if(grupoj.charAt(6)==grupoMax.charAt(6) && puntosJ > puntosMax)
+                {
+                    maxIndex = j;
+                }
+            }
+            modelo.moveRow(maxIndex, maxIndex, i);
+        }
+    }
+
+    private void generarOctavos() {
+        PartidoJpaController controPartido = new PartidoJpaController();
+        List<Partido> partidos = controPartido.findPartidoEntities();
+        DateFormat dia = new SimpleDateFormat("dd 'de' MMMM yyyy");
+        DateFormat hora = new SimpleDateFormat("HH:mm");
+        EquipoPaisJpaController controEquipo = new EquipoPaisJpaController();
+        List<EquipoPais> equipos = controEquipo.findEquipoPaisEntities();
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable6.getModel();
+        EntityManager em  = controPartido.getEntityManager();
+        em.getTransaction().begin();
+        eliminarOctavos();
+        while(modelo.getRowCount()!=0)
+            modelo.removeRow(0);
+        try
+        {
+            for(int i=49 ; i<=56 ; ++i)
+            {
+                Partido par = controPartido.findPartido((short)i);
+                String dummy = par.getCodEquipoLocal().getNombre();
+                int index = 0;
+                index = (dummy.charAt(1)-'A')*4;
+                if(dummy.charAt(0)=='2')
+                    index++;
+                String nombre = jTable5.getValueAt(index, 2).toString();
+                for(EquipoPais eq: equipos)
+                {
+                    if(eq.getNombre().equals(nombre))
+                    {
+                        par.setCodEquipoLocal(eq);
+                        break;
+                    }
+                }
+                dummy = par.getCodEquipoVisitante().getNombre();
+                index = (dummy.charAt(1)-'A')*4;
+                if(dummy.charAt(0)=='2')
+                    index++;
+                nombre = jTable5.getValueAt(index, 2).toString();
+                for(EquipoPais eq: equipos)
+                {
+                    if(eq.getNombre().equals(nombre))
+                    {
+                        par.setCodEquipoVisitante(eq);
+                        break;
+                    }
+                }
+                controPartido.edit(par);
+                EquipoPais local = par.getCodEquipoLocal();
+                EquipoPais visitante = par.getCodEquipoVisitante();
+                modelo.addRow(new Object[]{par.getNumPartido(), dia.format(par.getFecha()), par.getCodEstadio().getNombre(), par.getCodEstadio().getCiudad(),local.getNombre() + " - " + visitante.getNombre(), hora.format(par.getFecha())});
+            }
+            em.getTransaction().commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            em.getTransaction().rollback();
+        }
+    }
+    
+    private void eliminarOctavos()
+    {
+        PartidoJpaController controPartido = new PartidoJpaController();
+        EquipoPaisJpaController controEquipo = new EquipoPaisJpaController();
+        EntityManager em = controPartido.getEntityManager();
+        DateFormat dia = new SimpleDateFormat("dd 'de' MMMM yyyy");
+        DateFormat hora = new SimpleDateFormat("HH:mm");
+        Partido par;
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable6.getModel();
+        while(modelo.getRowCount()!=0)
+            modelo.removeRow(0);
+        
+        em.getTransaction().begin();
+        try
+        {
+            short equipo = 33;
+            for(short i=49 ; i<=56 ; ++i)
+            {
+                par = controPartido.findPartido(i);
+                if(par.getCodEquipoLocal().getNombre().length()!=2 || par.getCodEquipoVisitante().getNombre().length()!=2)
+                {
+                    par.setCodEquipoLocal( controEquipo.findEquipoPais(equipo++) );
+                    par.setCodEquipoVisitante( controEquipo.findEquipoPais(equipo++) );
+                    System.out.println(par.getCodEquipoLocal().getNombre() + " - " + par.getCodEquipoVisitante().getNombre());
+                    controPartido.edit(par);
+                }
+                Estadio est = par.getCodEstadio();
+                EquipoPais local = par.getCodEquipoLocal();
+                EquipoPais visitante = par.getCodEquipoVisitante();
+                modelo.addRow(new Object[]{par.getNumPartido(), dia.format(par.getFecha()), est.getNombre(), est.getCiudad(), local.getNombre() + " - " + visitante.getNombre(),hora.format(par.getFecha())});
+            }
+            em.getTransaction().commit();
+        }
+        catch(Exception e)
+        {
+            em.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }
