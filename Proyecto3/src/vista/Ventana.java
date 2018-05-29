@@ -7,6 +7,7 @@ package vista;
 
 
 
+import controllers.EntrenadorJpaController;
 import controllers.EquipoPaisJpaController;
 import controllers.GolJpaController;
 import controllers.JugadorJpaController;
@@ -45,6 +46,7 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
+import oracle.net.aso.j;
 import sun.awt.image.ByteArrayImageSource;
 import sun.awt.image.ToolkitImage;
 
@@ -130,6 +132,7 @@ public class Ventana extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jLabel98 = new javax.swing.JLabel();
         jLabel96 = new javax.swing.JLabel();
+        jButton27 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -259,6 +262,22 @@ public class Ventana extends javax.swing.JFrame {
         jButton19 = new javax.swing.JButton();
         jLabel112 = new javax.swing.JLabel();
         jLabel113 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel115 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jLabel116 = new javax.swing.JLabel();
+        jLabel117 = new javax.swing.JLabel();
+        jLabel118 = new javax.swing.JLabel();
+        jLabel119 = new javax.swing.JLabel();
+        jLabel120 = new javax.swing.JLabel();
+        jLabel121 = new javax.swing.JLabel();
+        jLabel122 = new javax.swing.JLabel();
+        jButton28 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTable10 = new javax.swing.JTable();
+        jButton29 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -312,8 +331,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel99.setText("Registrar Encuentro");
         jPanel1.add(jLabel99);
         jLabel99.setBounds(120, 40, 470, 50);
-
-        jLabel97.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen2.jpg")); // NOI18N
         jPanel1.add(jLabel97);
         jLabel97.setBounds(0, 0, 720, 630);
 
@@ -364,8 +381,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel102.setText("Partidos segunda fase");
         jPanel2.add(jLabel102);
         jLabel102.setBounds(220, 30, 380, 50);
-
-        jLabel103.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen6.jpg")); // NOI18N
         jPanel2.add(jLabel103);
         jLabel103.setBounds(0, 0, 720, 670);
 
@@ -458,8 +473,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel107.setText("Venta de boletería");
         jPanel3.add(jLabel107);
         jLabel107.setBounds(180, 40, 380, 60);
-
-        jLabel108.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen8.jpg")); // NOI18N
         jPanel3.add(jLabel108);
         jLabel108.setBounds(0, 0, 720, 650);
 
@@ -581,8 +594,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel94.setText("jLabel94");
         jPanel4.add(jLabel94);
         jLabel94.setBounds(50, 320, 123, 20);
-
-        jLabel100.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen3.jpg")); // NOI18N
         jPanel4.add(jLabel100);
         jLabel100.setBounds(0, -40, 720, 750);
 
@@ -616,8 +627,6 @@ public class Ventana extends javax.swing.JFrame {
         });
         jPanel5.add(jButton8);
         jButton8.setBounds(80, 410, 150, 40);
-
-        jLabel98.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen1.jpg")); // NOI18N
         jPanel5.add(jLabel98);
         jLabel98.setBounds(0, 0, 720, 670);
 
@@ -625,6 +634,15 @@ public class Ventana extends javax.swing.JFrame {
         jLabel96.setText("Mundial Rusia 2018");
         jPanel5.add(jLabel96);
         jLabel96.setBounds(70, 10, 590, 60);
+
+        jButton27.setText("Resumen");
+        jButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton27ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton27);
+        jButton27.setBounds(90, 500, 150, 60);
 
         jTabbedPane1.addTab("Principal", jPanel5);
 
@@ -705,8 +723,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel95.setText("jLabel95");
         jPanel6.add(jLabel95);
         jLabel95.setBounds(540, 70, 97, 20);
-
-        jLabel101.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen4.jpg")); // NOI18N
         jPanel6.add(jLabel101);
         jLabel101.setBounds(0, 0, 720, 670);
 
@@ -754,8 +770,6 @@ public class Ventana extends javax.swing.JFrame {
         });
         jPanel8.add(jButton23);
         jButton23.setBounds(510, 450, 110, 50);
-
-        jLabel106.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen7.jpg")); // NOI18N
         jPanel8.add(jLabel106);
         jLabel106.setBounds(0, 0, 720, 650);
 
@@ -851,8 +865,6 @@ public class Ventana extends javax.swing.JFrame {
 
         jPanel9.add(jScrollPane3);
         jScrollPane3.setBounds(80, 240, 540, 170);
-
-        jLabel109.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen9.jpg")); // NOI18N
         jPanel9.add(jLabel109);
         jLabel109.setBounds(0, 120, 720, 380);
 
@@ -969,7 +981,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton21))
-                .addContainerGap(451, Short.MAX_VALUE))
+                .addContainerGap(675, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informacion del Cliente", jPanel12);
@@ -1173,8 +1185,6 @@ public class Ventana extends javax.swing.JFrame {
         });
         jPanel13.add(jButton22);
         jButton22.setBounds(260, 440, 150, 30);
-
-        jLabel114.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen12.jpg")); // NOI18N
         jPanel13.add(jLabel114);
         jLabel114.setBounds(30, -220, 1030, 890);
 
@@ -1255,8 +1265,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel104.setText("Posiciones octavos de final");
         jPanel7.add(jLabel104);
         jLabel104.setBounds(140, 30, 500, 40);
-
-        jLabel105.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen5.jpg")); // NOI18N
         jPanel7.add(jLabel105);
         jLabel105.setBounds(-20, -160, 740, 830);
 
@@ -1368,8 +1376,6 @@ public class Ventana extends javax.swing.JFrame {
         jLabel110.setText("Selección de sillas");
         jPanel10.add(jLabel110);
         jLabel110.setBounds(210, 50, 300, 70);
-
-        jLabel111.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen10.jpg")); // NOI18N
         jPanel10.add(jLabel111);
         jLabel111.setBounds(0, -40, 720, 670);
 
@@ -1563,12 +1569,158 @@ public class Ventana extends javax.swing.JFrame {
         jLabel112.setText("Información de pago");
         jPanel11.add(jLabel112);
         jLabel112.setBounds(200, 20, 270, 30);
-
-        jLabel113.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen11.jpg")); // NOI18N
         jPanel11.add(jLabel113);
         jLabel113.setBounds(0, 0, 720, 670);
 
         jTabbedPane1.addTab("Información de pago", jPanel11);
+
+        jLabel115.setText("Equipos");
+
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
+
+        jLabel116.setText("jLabel116");
+
+        jLabel117.setText("DT");
+
+        jLabel118.setText("jLabel118");
+
+        jLabel119.setText("AUX");
+
+        jLabel120.setText("jLabel120");
+
+        jLabel121.setText("Partidos");
+
+        jLabel122.setText("Goleadores");
+
+        jButton28.setText("Seleccionar");
+        jButton28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton28ActionPerformed(evt);
+            }
+        });
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Local", "Gol Local ", "Visitante", "Gol Visitante"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable3);
+
+        jTable10.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Jugador", "Num Goles"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane9.setViewportView(jTable10);
+
+        jButton29.setText("Regresar");
+        jButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton29ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel14Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel115, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel121, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(220, 220, 220)
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel116, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel14Layout.createSequentialGroup()
+                                    .addComponent(jLabel119)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel120))
+                                .addGroup(jPanel14Layout.createSequentialGroup()
+                                    .addComponent(jLabel117)
+                                    .addGap(86, 86, 86)
+                                    .addComponent(jLabel118)))))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel122, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel115)
+                    .addComponent(jLabel116))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel117)
+                        .addComponent(jLabel118)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel119)
+                    .addComponent(jLabel120))
+                .addGap(1, 1, 1)
+                .addComponent(jButton28)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel121)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel122)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(328, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(368, 368, 368))
+        );
+
+        jTabbedPane1.addTab("Resumen", jPanel14);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1862,6 +2014,27 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
 
+    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
+        resumenEquipo();
+        actual = 13;
+        jTabbedPane1.setSelectedIndex(13);
+        
+    }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        
+    }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
+        System.out.println("CLIK");
+        llenarInfo();
+    }//GEN-LAST:event_jButton28ActionPerformed
+
+    private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
+        actual = 4;
+        jTabbedPane1.setSelectedIndex(4);
+    }//GEN-LAST:event_jButton29ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1883,6 +2056,9 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1894,6 +2070,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -1912,7 +2089,15 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel114;
+    private javax.swing.JLabel jLabel115;
+    private javax.swing.JLabel jLabel116;
+    private javax.swing.JLabel jLabel117;
+    private javax.swing.JLabel jLabel118;
+    private javax.swing.JLabel jLabel119;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel120;
+    private javax.swing.JLabel jLabel121;
+    private javax.swing.JLabel jLabel122;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -2013,6 +2198,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2027,13 +2213,19 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
@@ -3115,4 +3307,105 @@ public class Ventana extends javax.swing.JFrame {
         }
     }
 
+    private void resumenEquipo() {
+        
+        EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
+        List<EquipoPais> equipos = controEquipoPais.findEquipoPaisEntities();
+        jComboBox5.removeAllItems();
+        String equipo;
+        
+        
+        for(int i=0; i < equipos.size(); i++){
+          
+            if(i < 32){
+                jComboBox5.addItem(equipos.get(i).getNombre());
+            }  
+        }      
+    }
+
+    private void llenarInfo() {
+       
+        String nombreEquip = jComboBox5.getSelectedItem().toString();
+        System.out.println("Seleccionado " + jComboBox5.getSelectedItem().toString());
+        jLabel116.setText(nombreEquip);
+        
+        EquipoPaisJpaController controEquipoPais = new EquipoPaisJpaController();
+        PartidoJpaController controPartido = new PartidoJpaController();
+        GolJpaController controGol = new GolJpaController();
+        JugadorJpaController controJugador = new JugadorJpaController();
+        List<EquipoPais> equipos = controEquipoPais.findEquipoPaisEntities();
+        List<Partido> partidosE = controPartido.findPartidoEntities();
+        List<Gol> goles = controGol.findGolEntities();
+        List<Jugador> jug = controJugador.findJugadorEntities();
+        DefaultTableModel modelo = (DefaultTableModel) jTable3.getModel();
+        DefaultTableModel modelo2 = (DefaultTableModel) jTable10.getModel();
+        String Dt;
+        String Aux;
+        
+        
+        for(int i=0; i < equipos.size(); i++){
+            
+            if(nombreEquip.equalsIgnoreCase(equipos.get(i).getNombre())){
+            
+                Dt = equipos.get(i).getCodEntrenadorPrincipal().getNombres() + " " + equipos.get(i).getCodEntrenadorPrincipal().getApellidos();
+                Aux = equipos.get(i).getCodEntrenadorAuxiliar().getNombres() + "  " + equipos.get(i).getCodEntrenadorAuxiliar().getApellidos();
+                jLabel118.setText(Dt);
+                jLabel120.setText(Aux);
+            }    
+        }
+        
+        for(int j = 0 ; j < partidosE.size(); j++){
+        
+            if(nombreEquip.equalsIgnoreCase(partidosE.get(j).getCodEquipoLocal().getNombre()) || nombreEquip.equalsIgnoreCase(partidosE.get(j).getCodEquipoVisitante().getNombre())){
+               
+                String nomLocal = partidosE.get(j).getCodEquipoLocal().getNombre();
+                EquipoPais codLocal = partidosE.get(j).getCodEquipoLocal();
+                String nomVisi = partidosE.get(j).getCodEquipoVisitante().getNombre();
+                EquipoPais codVisi = partidosE.get(j).getCodEquipoVisitante();
+                 
+                short golLocal = 0;
+                short golVisi =0;
+                
+                goles = partidosE.get(j).getGolList();
+                
+                for(int k = 0; k < goles.size(); k++){
+                
+                    if(goles.get(k).getGolPK().getCodEquipo() == codLocal.getCodEquipo()){
+                    
+                        golLocal ++;  
+                    }else if (goles.get(k).getGolPK().getCodEquipo() == codVisi.getCodEquipo()) {
+                    
+                        golVisi ++;
+                    }
+                }
+                
+                modelo.addRow(new Object[]{nomLocal,golLocal,nomVisi,golVisi});
+            } 
+        }
+        
+        for(int e = 0 ; e < equipos.size(); e++){
+
+            if(equipos.get(e).getNombre().equalsIgnoreCase(nombreEquip)){
+                
+                jug = equipos.get(e).getJugadorList();
+                
+                for(int juga = 0; juga < jug.size(); juga ++){
+                     
+                    goles = jug.get(juga).getGolList();
+                    int tam = goles.size();
+                    modelo2.addRow(new Object[]{jug.get(juga).getNombres() + " " + jug.get(juga).getApellidos(),tam});
+ 
+                }
+            }
+        }
+        
+        for(int t=1 ; t < modelo2.getRowCount(); t++){
+        
+            if((Integer) modelo2.getValueAt(t, 1) > (Integer) modelo2.getValueAt(t-1, 1)){
+                
+                modelo2.moveRow(t, t, t-1);
+                
+            }
+        }
+    }
 }
