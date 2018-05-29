@@ -162,6 +162,7 @@ public class Ventana extends javax.swing.JFrame {
         jButton15 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable7 = new javax.swing.JTable();
+        jLabel109 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
@@ -755,22 +756,51 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Programación", jPanel8);
 
+        jPanel9.setLayout(null);
+
+        jLabel21.setFont(new java.awt.Font("Goudy Old Style", 3, 36)); // NOI18N
         jLabel21.setText("Disponibilidad de entradas por categoria");
+        jPanel9.add(jLabel21);
+        jLabel21.setBounds(40, 40, 640, 50);
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Estadio");
+        jPanel9.add(jLabel22);
+        jLabel22.setBounds(340, 150, 80, 17);
 
+        jLabel23.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Partido");
+        jPanel9.add(jLabel23);
+        jLabel23.setBounds(340, 180, 60, 17);
 
+        jLabel24.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Entradas disponibles");
+        jPanel9.add(jLabel24);
+        jLabel24.setBounds(250, 210, 150, 17);
 
         jLabel25.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("jLabel25");
+        jPanel9.add(jLabel25);
+        jLabel25.setBounds(530, 150, 150, 17);
 
         jLabel26.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("jLabel26");
+        jPanel9.add(jLabel26);
+        jLabel26.setBounds(530, 180, 129, 17);
 
         jLabel27.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("jLabel27");
+        jPanel9.add(jLabel27);
+        jLabel27.setBounds(530, 210, 129, 17);
 
         jButton14.setText("Solicitar entradas en categoria");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -778,6 +808,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
+        jPanel9.add(jButton14);
+        jButton14.setBounds(190, 510, 250, 50);
 
         jButton15.setText("Regresar");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
@@ -785,6 +817,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton15ActionPerformed(evt);
             }
         });
+        jPanel9.add(jButton15);
+        jButton15.setBounds(580, 520, 110, 30);
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -810,61 +844,12 @@ public class Ventana extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable7);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel24))
-                                .addGap(56, 56, 56)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addGap(44, 44, 44)
-                                .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(240, 240, 240))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(jButton14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton15)
-                        .addGap(231, 231, 231))))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel21)
-                .addGap(33, 33, 33)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel25))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel26))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton15)
-                    .addComponent(jButton14))
-                .addContainerGap(263, Short.MAX_VALUE))
-        );
+        jPanel9.add(jScrollPane3);
+        jScrollPane3.setBounds(80, 240, 540, 170);
+
+        jLabel109.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen9.jpg")); // NOI18N
+        jPanel9.add(jLabel109);
+        jLabel109.setBounds(0, 120, 720, 380);
 
         jTabbedPane1.addTab("Disponiblidad de entradas", jPanel9);
 
@@ -1993,6 +1978,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel107;
     private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
