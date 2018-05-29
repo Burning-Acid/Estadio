@@ -92,6 +92,8 @@ public class Ventana extends javax.swing.JFrame {
         jComboBox4 = new javax.swing.JComboBox();
         jButton9 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
+        jLabel102 = new javax.swing.JLabel();
+        jLabel103 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -306,9 +308,19 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Registrar Encuentro", jPanel1);
 
-        jLabel10.setText("Seleccionar Fase");
+        jPanel2.setLayout(null);
 
-        jLabel11.setText("Fase");
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Seleccionar Fase");
+        jPanel2.add(jLabel10);
+        jLabel10.setBounds(320, 160, 190, 22);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Fase:");
+        jPanel2.add(jLabel11);
+        jLabel11.setBounds(240, 240, 100, 30);
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar", "Octavos de Final", "Cuartos de Final"}));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
@@ -316,6 +328,8 @@ public class Ventana extends javax.swing.JFrame {
                 jComboBox4ActionPerformed(evt);
             }
         });
+        jPanel2.add(jComboBox4);
+        jComboBox4.setBounds(390, 240, 180, 30);
 
         jButton9.setText("Seleccionar");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -323,6 +337,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton9);
+        jButton9.setBounds(350, 310, 110, 40);
 
         jButton25.setText("Regresar");
         jButton25.addActionListener(new java.awt.event.ActionListener() {
@@ -330,39 +346,17 @@ public class Ventana extends javax.swing.JFrame {
                 jButton25ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton25);
+        jButton25.setBounds(600, 570, 100, 40);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jLabel11)
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton9)
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton25))
-                    .addComponent(jLabel10)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(358, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton25))
-                .addContainerGap(526, Short.MAX_VALUE))
-        );
+        jLabel102.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
+        jLabel102.setText("Partidos segunda fase");
+        jPanel2.add(jLabel102);
+        jLabel102.setBounds(220, 30, 380, 50);
+
+        jLabel103.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen6.jpg")); // NOI18N
+        jPanel2.add(jLabel103);
+        jLabel103.setBounds(0, 0, 720, 670);
 
         jTabbedPane1.addTab("Generar Partidos de II Fase", jPanel2);
 
@@ -2027,6 +2021,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
