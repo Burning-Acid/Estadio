@@ -84,6 +84,7 @@ public class Ventana extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton24 = new javax.swing.JButton();
+        jLabel99 = new javax.swing.JLabel();
         jLabel97 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -254,9 +255,11 @@ public class Ventana extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jLabel1.setText("Seleccionar Partido");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Seleccionar Partido:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(146, 222, 91, 14);
+        jLabel1.setBounds(60, 120, 180, 30);
 
         jLabel2.setText("Partidos");
         jPanel1.add(jLabel2);
@@ -269,7 +272,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(324, 271, 193, 20);
+        jComboBox1.setBounds(370, 120, 220, 30);
 
         jButton1.setText("Seleccionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -278,7 +281,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(133, 419, 87, 32);
+        jButton1.setBounds(140, 330, 140, 60);
 
         jButton24.setText("Regresar");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
@@ -287,9 +290,17 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton24);
-        jButton24.setBounds(381, 419, 96, 32);
+        jButton24.setBounds(410, 330, 140, 60);
+
+        jLabel99.setFont(new java.awt.Font("Cooper Black", 3, 36)); // NOI18N
+        jLabel99.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel99.setText("Registrar Encuentro");
+        jPanel1.add(jLabel99);
+        jLabel99.setBounds(120, 40, 470, 50);
+
+        jLabel97.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen2.jpg")); // NOI18N
         jPanel1.add(jLabel97);
-        jLabel97.setBounds(0, 0, 710, 990);
+        jLabel97.setBounds(0, 0, 720, 630);
 
         jTabbedPane1.addTab("Registrar Encuentro", jPanel1);
 
@@ -2160,6 +2171,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel96;
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
