@@ -2028,6 +2028,8 @@ public class Ventana extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         generarOctavos();
+        if(jComboBox4.getSelectedIndex()==2)
+            generarCuartos();
         actual = 6;
         jTabbedPane1.setSelectedIndex(6);
     }//GEN-LAST:event_jButton10ActionPerformed
@@ -2140,7 +2142,9 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        eliminarOctavos();
+        eliminarCuartos();
+        if(jComboBox4.getSelectedIndex()==1)
+            eliminarOctavos();
         actual = 6;
         jTabbedPane1.setSelectedIndex(6);
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -3631,6 +3635,98 @@ public class Ventana extends javax.swing.JFrame {
                 }
             }
             modelo.moveRow(max, max, i);
+        }
+    }
+
+    private void generarCuartos() {
+        PartidoJpaController controPartido = new PartidoJpaController();
+        DateFormat dia = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat hora = new SimpleDateFormat("HH:mm");
+        
+        EntityManager em = controPartido.getEntityManager();
+        DefaultTableModel modelo = (DefaultTableModel)jTable6.getModel();
+        while(modelo.getRowCount()!=0)
+            modelo.removeRow(0);
+        em.getTransaction().begin();
+        try{
+            for(int i=57 ; i<=60 ; ++i)
+            {
+                Partido par = controPartido.findPartido((short)i);
+                EquipoPais local = par.getCodEquipoLocal();
+                EquipoPais visitante = par.getCodEquipoVisitante();
+
+                if(local.getNombre().length()==3 && visitante.getNombre().length()==3)
+                {
+                    short CodLocal = parseShort(local.getNombre().substring(1));
+                    short CodVisitante = parseShort(visitante.getNombre().substring(1));
+
+                    Partido parlocal = controPartido.findPartido(CodLocal);
+                    Partido parvisit = controPartido.findPartido(CodVisitante);
+
+                    local = parlocal.getCodEquipoLocal();
+                    if(verificarGanado(parlocal, local.getCodEquipo())!=1)
+                    {
+                        local = parlocal.getCodEquipoVisitante();
+                    }
+
+                    visitante = parvisit.getCodEquipoLocal();
+                    if(verificarGanado(parvisit, visitante.getCodEquipo())!=1)
+                    {
+                        visitante = parvisit.getCodEquipoVisitante();
+                    }
+
+                    par.setCodEquipoLocal(local);
+                    par.setCodEquipoVisitante(visitante);
+                    controPartido.edit(par);
+                }
+                Estadio est = par.getCodEstadio();
+                modelo.addRow(new Object[]{par.getNumPartido(), dia.format(par.getFecha()), est.getNombre(), est.getCiudad(), local.getNombre()+" - "+visitante.getNombre(), hora.format(par.getFecha())});
+            }
+            em.getTransaction().commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            em.getTransaction().rollback();
+            actual = 4;
+            jTabbedPane1.setSelectedIndex(4);
+        }
+        
+    }
+
+    private void eliminarCuartos() {
+        PartidoJpaController controPartido = new PartidoJpaController();
+        EquipoPaisJpaController controEquipo = new EquipoPaisJpaController();
+        DateFormat dia = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat hora = new SimpleDateFormat("HH:mm");
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable6.getModel();
+        while(modelo.getRowCount()!=0)
+            modelo.removeRow(0);
+        
+        EntityManager em = controPartido.getEntityManager();
+        em.getTransaction().begin();
+        try{
+            short equipo = 49;
+            for(int i=57 ; i<=60 ; ++i)
+            {
+                Partido par = controPartido.findPartido((short)i);
+                EquipoPais local = controEquipo.findEquipoPais(equipo++);
+                EquipoPais visitante = controEquipo.findEquipoPais(equipo++);
+                par.setCodEquipoLocal(local);
+                par.setCodEquipoVisitante(visitante);
+                controPartido.edit(par);
+                Estadio est = par.getCodEstadio();
+                modelo.addRow(new Object[]{par.getNumPartido(), dia.format(par.getFecha()), est.getNombre(), est.getCiudad(), local.getNombre()+" - "+visitante.getNombre(), hora.format(par.getFecha())});
+            }
+            em.getTransaction().commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e, "ERROR", JOptionPane.ERROR_MESSAGE);
+            em.getTransaction().rollback();
+            actual = 4;
+            jTabbedPane1.setSelectedIndex(4);
         }
     }
 
