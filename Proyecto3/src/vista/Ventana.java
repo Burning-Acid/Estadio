@@ -106,6 +106,8 @@ public class Ventana extends javax.swing.JFrame {
         jButton26 = new javax.swing.JButton();
         jLabel87 = new javax.swing.JLabel();
         jLabel88 = new javax.swing.JLabel();
+        jLabel107 = new javax.swing.JLabel();
+        jLabel108 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -363,11 +365,23 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Generar Partidos de II Fase", jPanel2);
 
+        jPanel3.setLayout(null);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Disponibilidad de entradas por partidos, fase de eliminatoria");
+        jPanel3.add(jLabel14);
+        jLabel14.setBounds(150, 110, 490, 30);
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel15.setText("Fecha actual");
+        jPanel3.add(jLabel15);
+        jLabel15.setBounds(230, 270, 140, 22);
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel16.setText("Hora actual");
+        jPanel3.add(jLabel16);
+        jLabel16.setBounds(230, 300, 130, 30);
 
         jButton13.setText("Solicitar Entradas");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +389,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton13);
+        jButton13.setBounds(250, 580, 180, 50);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -403,69 +419,43 @@ public class Ventana extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        jPanel3.add(jScrollPane1);
+        jScrollPane1.setBounds(70, 340, 610, 230);
+        jPanel3.add(jLabel18);
+        jLabel18.setBounds(173, 75, 0, 0);
+        jPanel3.add(jLabel19);
+        jLabel19.setBounds(173, 93, 0, 0);
+
         jButton26.setText("Regresar");
         jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton26ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton26);
+        jButton26.setBounds(600, 580, 90, 40);
 
         jLabel87.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel87.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel87.setText("jLabel87");
+        jPanel3.add(jLabel87);
+        jLabel87.setBounds(390, 270, 201, 17);
 
         jLabel88.setHorizontalAlignment(SwingConstants.RIGHT);
+        jLabel88.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel88.setText("jLabel88");
+        jPanel3.add(jLabel88);
+        jLabel88.setBounds(400, 310, 201, 14);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton13)
-                        .addGap(89, 89, 89)
-                        .addComponent(jButton26))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16))
-                        .addGap(57, 57, 57)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel19))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel88, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel87, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)))
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 593, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel87))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel88))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton13)
-                    .addComponent(jButton26))
-                .addContainerGap(309, Short.MAX_VALUE))
-        );
+        jLabel107.setFont(new java.awt.Font("Bookman Old Style", 3, 36)); // NOI18N
+        jLabel107.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel107.setText("Venta de boletería");
+        jPanel3.add(jLabel107);
+        jLabel107.setBounds(180, 40, 380, 60);
+
+        jLabel108.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen8.jpg")); // NOI18N
+        jPanel3.add(jLabel108);
+        jLabel108.setBounds(0, 0, 720, 650);
 
         jTabbedPane1.addTab("Venta de Boletería ", jPanel3);
 
@@ -2001,6 +1991,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
