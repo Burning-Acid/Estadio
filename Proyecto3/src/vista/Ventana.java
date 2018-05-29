@@ -985,12 +985,12 @@ public class Ventana extends javax.swing.JFrame {
         jLabel54.setForeground(new java.awt.Color(255, 255, 255));
         jLabel54.setText("Nombres");
         jPanel13.add(jLabel54);
-        jLabel54.setBounds(46, 74, 42, 14);
+        jLabel54.setBounds(46, 74, 70, 14);
 
         jLabel55.setForeground(new java.awt.Color(255, 255, 255));
         jLabel55.setText("Apellidos");
         jPanel13.add(jLabel55);
-        jLabel55.setBounds(46, 106, 42, 14);
+        jLabel55.setBounds(46, 106, 80, 14);
 
         jLabel56.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel56.setForeground(new java.awt.Color(255, 255, 255));
@@ -1007,7 +1007,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel58.setForeground(new java.awt.Color(255, 255, 255));
         jLabel58.setText("Documento");
         jPanel13.add(jLabel58);
-        jLabel58.setBounds(46, 138, 54, 14);
+        jLabel58.setBounds(46, 138, 80, 14);
 
         jLabel59.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel59.setForeground(new java.awt.Color(255, 255, 255));
@@ -1024,46 +1024,46 @@ public class Ventana extends javax.swing.JFrame {
         jLabel61.setForeground(new java.awt.Color(255, 255, 255));
         jLabel61.setText("Estadio:");
         jPanel13.add(jLabel61);
-        jLabel61.setBounds(430, 70, 39, 14);
+        jLabel61.setBounds(430, 70, 80, 14);
 
         jLabel63.setForeground(new java.awt.Color(255, 255, 255));
         jLabel63.setText("Partido:");
         jPanel13.add(jLabel63);
-        jLabel63.setBounds(430, 100, 38, 14);
+        jLabel63.setBounds(430, 100, 70, 14);
 
         jLabel62.setForeground(new java.awt.Color(255, 255, 255));
         jLabel62.setText("Fecha hora");
         jPanel13.add(jLabel62);
-        jLabel62.setBounds(430, 130, 54, 14);
+        jLabel62.setBounds(430, 130, 80, 14);
 
         jLabel64.setForeground(new java.awt.Color(255, 255, 255));
         jLabel64.setText("Equipos");
         jPanel13.add(jLabel64);
-        jLabel64.setBounds(430, 160, 37, 14);
+        jLabel64.setBounds(430, 160, 70, 14);
 
         jLabel65.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel65.setForeground(new java.awt.Color(255, 255, 255));
         jLabel65.setText("jLabel65");
         jPanel13.add(jLabel65);
-        jLabel65.setBounds(530, 70, 183, 14);
+        jLabel65.setBounds(530, 70, 150, 14);
 
         jLabel66.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel66.setForeground(new java.awt.Color(255, 255, 255));
         jLabel66.setText("jLabel66");
         jPanel13.add(jLabel66);
-        jLabel66.setBounds(530, 100, 183, 14);
+        jLabel66.setBounds(530, 100, 150, 14);
 
         jLabel67.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel67.setForeground(new java.awt.Color(255, 255, 255));
         jLabel67.setText("jLabel67");
         jPanel13.add(jLabel67);
-        jLabel67.setBounds(530, 130, 183, 14);
+        jLabel67.setBounds(530, 130, 150, 14);
 
         jLabel68.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel68.setForeground(new java.awt.Color(255, 255, 255));
         jLabel68.setText("jLabel68");
         jPanel13.add(jLabel68);
-        jLabel68.setBounds(530, 160, 184, 14);
+        jLabel68.setBounds(530, 160, 150, 14);
 
         jLabel69.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel69.setForeground(new java.awt.Color(255, 255, 255));
@@ -1074,17 +1074,17 @@ public class Ventana extends javax.swing.JFrame {
         jLabel70.setForeground(new java.awt.Color(255, 255, 255));
         jLabel70.setText("Numero de:");
         jPanel13.add(jLabel70);
-        jLabel70.setBounds(46, 262, 56, 14);
+        jLabel70.setBounds(46, 262, 80, 14);
 
         jLabel71.setForeground(new java.awt.Color(255, 255, 255));
         jLabel71.setText("Categoria:");
         jPanel13.add(jLabel71);
-        jLabel71.setBounds(50, 290, 51, 14);
+        jLabel71.setBounds(50, 290, 80, 14);
 
         jLabel72.setForeground(new java.awt.Color(255, 255, 255));
         jLabel72.setText("Sillas:");
         jPanel13.add(jLabel72);
-        jLabel72.setBounds(50, 320, 27, 14);
+        jLabel72.setBounds(50, 320, 60, 14);
 
         jLabel73.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel73.setForeground(new java.awt.Color(255, 255, 255));
@@ -1113,22 +1113,22 @@ public class Ventana extends javax.swing.JFrame {
         jLabel77.setForeground(new java.awt.Color(255, 255, 255));
         jLabel77.setText("Total a Pagar");
         jPanel13.add(jLabel77);
-        jLabel77.setBounds(420, 260, 64, 14);
+        jLabel77.setBounds(420, 260, 90, 14);
 
         jLabel78.setForeground(new java.awt.Color(255, 255, 255));
         jLabel78.setText("Forma de Pago");
         jPanel13.add(jLabel78);
-        jLabel78.setBounds(420, 290, 72, 14);
+        jLabel78.setBounds(420, 290, 90, 14);
 
         jLabel79.setForeground(new java.awt.Color(255, 255, 255));
         jLabel79.setText("Recibido");
         jPanel13.add(jLabel79);
-        jLabel79.setBounds(420, 310, 40, 14);
+        jLabel79.setBounds(420, 310, 60, 14);
 
         jLabel80.setForeground(new java.awt.Color(255, 255, 255));
         jLabel80.setText("Numero de Factura");
         jPanel13.add(jLabel80);
-        jLabel80.setBounds(420, 340, 92, 14);
+        jLabel80.setBounds(420, 340, 120, 14);
 
         jLabel81.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel81.setForeground(new java.awt.Color(255, 255, 255));
@@ -1157,7 +1157,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel85.setForeground(new java.awt.Color(255, 255, 255));
         jLabel85.setText("Fecha de Compra");
         jPanel13.add(jLabel85);
-        jLabel85.setBounds(420, 370, 84, 14);
+        jLabel85.setBounds(420, 370, 100, 14);
 
         jLabel86.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel86.setForeground(new java.awt.Color(255, 255, 255));
