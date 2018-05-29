@@ -147,6 +147,7 @@ public class Ventana extends javax.swing.JFrame {
         jTable6 = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
         jButton23 = new javax.swing.JButton();
+        jLabel106 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -715,7 +716,12 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Agregar Anotacion", jPanel6);
 
+        jPanel8.setLayout(null);
+
+        jLabel17.setFont(new java.awt.Font("Monotype Corsiva", 3, 36)); // NOI18N
         jLabel17.setText("Programación");
+        jPanel8.add(jLabel17);
+        jLabel17.setBounds(240, 30, 260, 50);
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -739,45 +745,23 @@ public class Ventana extends javax.swing.JFrame {
         jTable6.getTableHeader().setReorderingAllowed(false);
         jScrollPane12.setViewportView(jTable6);
 
+        jPanel8.add(jScrollPane12);
+        jScrollPane12.setBounds(80, 100, 570, 250);
+        jPanel8.add(jLabel20);
+        jLabel20.setBounds(152, 65, 0, 0);
+
         jButton23.setText("Regresar");
         jButton23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton23ActionPerformed(evt);
             }
         });
+        jPanel8.add(jButton23);
+        jButton23.setBounds(510, 450, 110, 50);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel17)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(jButton23))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(204, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jButton23)
-                .addContainerGap(344, Short.MAX_VALUE))
-        );
+        jLabel106.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen7.jpg")); // NOI18N
+        jPanel8.add(jLabel106);
+        jLabel106.setBounds(0, 0, 720, 650);
 
         jTabbedPane1.addTab("Programación", jPanel8);
 
@@ -1280,7 +1264,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         jPanel7.add(jButton11);
-        jButton11.setBounds(340, 550, 180, 30);
+        jButton11.setBounds(320, 550, 180, 30);
 
         jButton12.setText("Regresar");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -1328,7 +1312,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel105.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen5.jpg")); // NOI18N
         jPanel7.add(jLabel105);
-        jLabel105.setBounds(-20, -160, 720, 670);
+        jLabel105.setBounds(-20, -160, 740, 830);
 
         jTabbedPane1.addTab("Posiciones", jPanel7);
 
@@ -2016,6 +2000,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel103;
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
