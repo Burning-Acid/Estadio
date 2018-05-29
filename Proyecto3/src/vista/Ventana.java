@@ -212,6 +212,8 @@ public class Ventana extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        jLabel104 = new javax.swing.JLabel();
+        jLabel105 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -699,7 +701,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
         jPanel6.add(jButton5);
-        jButton5.setBounds(620, 620, 77, 23);
+        jButton5.setBounds(587, 620, 110, 23);
 
         jLabel95.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel95.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1248,9 +1250,19 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Confirmación de Compra", jPanel13);
 
-        jLabel12.setText("Ronda Eliminatoria");
+        jPanel7.setLayout(null);
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel12.setText("Ronda Eliminatoria");
+        jPanel7.add(jLabel12);
+        jLabel12.setBounds(120, 100, 170, 26);
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(153, 204, 255));
         jLabel13.setText("Detalle De Posiciones");
+        jPanel7.add(jLabel13);
+        jLabel13.setBounds(70, 150, 150, 17);
 
         jButton10.setText("Generar Partidos Fase");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -1258,6 +1270,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
+        jPanel7.add(jButton10);
+        jButton10.setBounds(70, 550, 190, 30);
 
         jButton11.setText("Eliminar Partidos Fase");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -1265,6 +1279,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
+        jPanel7.add(jButton11);
+        jButton11.setBounds(340, 550, 180, 30);
 
         jButton12.setText("Regresar");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
@@ -1272,6 +1288,8 @@ public class Ventana extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
+        jPanel7.add(jButton12);
+        jButton12.setBounds(590, 550, 90, 30);
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1299,45 +1317,18 @@ public class Ventana extends javax.swing.JFrame {
         jTable5.getTableHeader().setReorderingAllowed(false);
         jScrollPane10.setViewportView(jTable5);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabel13))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton10)
-                        .addGap(46, 46, 46)
-                        .addComponent(jButton11)
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton12)))
-                .addContainerGap(206, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11)
-                    .addComponent(jButton12))
-                .addContainerGap(231, Short.MAX_VALUE))
-        );
+        jPanel7.add(jScrollPane10);
+        jScrollPane10.setBounds(70, 190, 610, 280);
+
+        jLabel104.setFont(new java.awt.Font("Bodoni MT", 3, 36)); // NOI18N
+        jLabel104.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel104.setText("Posiciones octavos de final");
+        jPanel7.add(jLabel104);
+        jLabel104.setBounds(140, 30, 500, 40);
+
+        jLabel105.setIcon(new javax.swing.ImageIcon("C:\\Users\\AnGgi\\Documents\\GitHub\\Estadio\\Proyecto3\\src\\Imagenes\\imagen5.jpg")); // NOI18N
+        jPanel7.add(jLabel105);
+        jLabel105.setBounds(-20, -160, 720, 670);
 
         jTabbedPane1.addTab("Posiciones", jPanel7);
 
@@ -2023,6 +2014,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel102;
     private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
+    private javax.swing.JLabel jLabel105;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
